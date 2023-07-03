@@ -24,7 +24,7 @@ function EmailIsCorrect() {
       .then(popupHTML => {
         let popupContainer = document.getElementById('popup');
         popupContainer.innerHTML = popupHTML;
-        popupContainer.style.backgroundColor = "brown";
+        popupContainer.style.color = "red";
       });
   }
 }

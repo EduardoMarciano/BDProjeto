@@ -7,7 +7,7 @@
 }
 
 #login-box {
-    background-color: #222E50;
+    background-color: var(--branco);
     border-radius: 10px;
     width: 38%;
     min-width: 370px;
@@ -29,11 +29,11 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: #D9D9D9;
+    background-color: var(--laranja);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
-    color: #222E50;
+    color: var(--preto);;
     min-height: 59px;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -42,16 +42,16 @@
 }
 
 #enter:hover {
-    background-color: #8BC34A;
+    background-color: var(--azul-escuro);
 }
 
 #recover-password-link {
     margin-bottom: 2%;
-    color: #D9D9D9;
+    color: var(--azul-escuro);
 }
 
 #recover-password-link:hover {
-    color: #8BC34A;
+    color: var(--laranja);
     transition: 300ms;
 }
 
