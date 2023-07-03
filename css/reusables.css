@@ -1,0 +1,67 @@
+#header-bar {
+    display: flex;
+    background-color: #8BC34A;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: #8BC34A;
+    width: 100%;
+    height: clamp(47px, 8.4vh, 100px);
+    box-sizing: border-box;
+    top: 0%;
+    position: fixed;
+    z-index: 10;
+}
+
+#header-logo-button {
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    padding-left: 1.65%;
+    padding-right: 1.65%;
+    padding-top: 4px;
+    background: #D9D9D9;
+}
+
+.footer-bar{
+    display: flex;
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+
+    height: clamp(47px, 8.4vh, 100px);
+
+    background-color: var(--primario);
+    box-sizing: border-box;
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    padding: 12px 25px;
+    text-decoration: none;
+    color: inherit;
+}
+
+#session-buttons * {
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    padding: 12px 25px;
+    text-decoration: none;
+    color: inherit;
+}
+
+#signin-button {
+    background: var(--secundario);
+    color: white;
+}
+
+#signup-button {
+    background: var(--primario);
+    color: var(--secundario);
+}

@@ -1,0 +1,64 @@
+:root
+{
+    --primario: #8BC34A;
+    --secundario: #111E3E;
+    --secundario-claro: #222E50;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url(/fonts/Inter-Variable.ttf);
+}
+
+body
+{
+    background-color: var(--secundario);
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    min-width: var(--global-min-width);
+    min-height: var(--global-min-height);
+}
+
+.form {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 700;
+    background-color: #D9D9D9;
+    border: none;
+    outline: none;
+    min-height: 59px;
+    border-radius: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 1rem;
+    width: 45%;
+    position: relative;
+}
+
+.form::placeholder {
+    font-weight: 700;
+    color: #222E50;
+    opacity: 0.7;
+}
+
+.footer-bar{
+    display: flex;
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+    background-color: var(--primario);
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+
+    border: none;
+    font-weight: bold;
+    padding: 12px 25px;
+    text-decoration: none;
+    color: inherit;
+
+    z-index: 10;
+}

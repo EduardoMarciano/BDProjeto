@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <title>CJR Miniblog - Login</title>
+</head>
+<body>
+    <header id="header-bar-container"></header>
+
+    <div id="login-container">
+        <div id="login-box">
+            <img src="/svg/user.svg" id="login-user-symbolic-icon" width=215 height="203">
+                <input class="form" id="login-user" type="email" name="email" placeholder="Login" required/>
+
+                <div class="password-form-container">
+                    <input class="form" id="login-password-form" type="password" name="password" placeholder="Senha" required/>
+                    <button class="show-password" onclick="showPassword('login-password-form', this)"><i class="fas fa-eye"></i></button>
+                </div>
+                <a id="recover-password-link" href="/html/conferir-email.html">Esqueceu a senha?</a>
+                
+                <button id="enter">Entrar</button>
+        </div>
+    </div>
+    <footer id = "footerbar-container"></footer>
+
+    <script src="/js/login.js"></script>
+    <script src="/js/reusables.js"></script>
+    <script>
+        createBars();
+    </script>
+</body>
+</html>
