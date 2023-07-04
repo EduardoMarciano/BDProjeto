@@ -33,7 +33,7 @@
 }
 
 #signup-box {
-    background-color: var(--branco);
+    background-color: var(--pastel);
     border-radius: 10px;
     min-width: 450px;
     min-height: 70%;
@@ -67,20 +67,20 @@
 }
 
 #login-page-link {
-    color: var(--laranja);
+    color: var(--branco);
     margin-bottom: 2%;
     text-decoration: none;
 }
 
 #login-page-link:hover {
-    color: var(--azul-escuro);
+    color: var(--laranja);
     transition: 300ms;
 }
 
 #gender {
     font-size: inherit;
     font-family: inherit;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -103,7 +103,7 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
@@ -115,6 +115,6 @@
 }
 
 #signup-confirm-button:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--laranja);
     transition: 300ms;
 }

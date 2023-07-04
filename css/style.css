@@ -1,9 +1,9 @@
 :root{
 
-    --branco:       #f0f0af;
-    --laranja:      #E95420;
+    --pastel:       #45113e;
+    --laranja:      #2d0824;
     --preto:        #000000;
-    --azul-escuro:  #6b0103;
+    --branco:       white;
 }
 
 @font-face {
@@ -13,7 +13,7 @@
 
 body
 {
-    background-color: var(--azul-escuro);
+    background-color: var(--branco);
     padding: 0;
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -26,7 +26,7 @@ body
     font-size: inherit;
     font-family: inherit;
     font-weight: 700;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     border: none;
     outline: none;
     min-height: 59px;

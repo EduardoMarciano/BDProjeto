@@ -7,7 +7,7 @@
 }
 
 #login-box {
-    background-color: var(--branco);
+    background-color: var(--pastel);
     border-radius: 10px;
     width: 38%;
     min-width: 370px;
@@ -29,7 +29,7 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
@@ -42,12 +42,12 @@
 }
 
 #enter:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--laranja);
 }
 
 #recover-password-link {
     margin-bottom: 2%;
-    color: var(--azul-escuro);
+    color: var(--branco);
 }
 
 #recover-password-link:hover {

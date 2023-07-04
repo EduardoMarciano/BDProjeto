@@ -33,7 +33,7 @@
 }
 
 #password-recovery-box {
-    background-color: var(--branco);
+    background-color: var(--pastel);
     border-radius: 10px;
     min-width: 450px;
     min-height: 70%;
@@ -67,13 +67,13 @@
 }
 
 #login-page-link {
-    color: var(--laranja);
+    color: var(--branco);
     text-decoration: none;
     margin-bottom: 2%;
 }
 
 #login-page-link:hover {
-    color: var(--azul-escuro);
+    color: var(--laranja);
     transition: 300ms;
 }
 #password-recovery-confirm-button {
@@ -82,7 +82,7 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
@@ -94,22 +94,22 @@
 }
 
 #password-recovery-confirm-button:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--laranja);
+    transition: 300ms;
 }
 
 .form-label {
     align-self: self-start;
     padding-left: 7rem;
-    color: var(--preto);
+    color: var(--branco);
     font-weight: 700;
-    opacity: 0.7;
+
 }
 
 #password-recovery-box-title {
     align-self: self-start;
     margin-top: 3rem;
     margin-left: 5rem;
-    color: var(--preto);
+    color: var(--branco);
     font-weight: 700;
-    opacity: 0.7;
 }

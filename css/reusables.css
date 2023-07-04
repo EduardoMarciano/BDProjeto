@@ -43,7 +43,7 @@
     font-weight: bold;
     padding: 12px 25px;
     text-decoration: none;
-    color: var(--preto);
+    color: var(--branco);
 }
 
 #session-buttons * {

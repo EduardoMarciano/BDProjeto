@@ -7,7 +7,7 @@
 }
 
 #request-email-password-recovery-box {
-    background-color: var(--branco);
+    background-color: var(--pastel);
     border-radius: 10px;
     width: 38%;
     min-width: 370px;
@@ -21,7 +21,7 @@
 #advise-text  {
     margin-left: 1rem;
     margin-right: 1rem;
-    color: var(--preto);
+    color: var(--branco);
 }
 
 #request-email-password-recovery-user-symbolic-icon {
@@ -35,7 +35,7 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: var(--laranja);
+    background-color: var(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
@@ -48,16 +48,16 @@
 }
 
 #enter:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--laranja);
 }
 
 #recover-password-link {
-    color: var(--laranja);
+    color: var(--branco);
     margin-bottom: 2%;
 }
 
 #recover-password-link:hover {
-    color: var(--azul-escuro);
+    color: var(--laranja);
     transition: 300ms;
 }
 
@@ -81,6 +81,6 @@
 }
 
 #popup{
-    background-color: var(--branco);
+    background-color: var(--pastel);
     color: red;
 }
