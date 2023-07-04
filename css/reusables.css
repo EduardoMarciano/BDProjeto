@@ -1,6 +1,6 @@
 #header-bar {
     display: flex;
-    background-color: var(--laranja);
+    background-color: var(--pastel);
     align-items: center;
     justify-content: space-between;
     padding-left: 2%;
@@ -31,7 +31,7 @@
 
     height: clamp(47px, 8.4vh, 100px);
 
-    background-color: var(--laranja);
+    background-color: var(--pastel);
     box-sizing: border-box;
 
     text-align: center;
