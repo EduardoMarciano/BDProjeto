@@ -11,14 +11,14 @@
 
     border-width: 0px 1px 0px 1px;
     border-style: solid;
-    border-color: #7E7E7E;
+    border-color: var(--secundario-claro);
     padding-top: 1rem;
 }
 
 #content-container div div {
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #7E7E7E;
+    border-color: var(--secundario-claro);
 }
 
 #content-container div div * {
@@ -27,7 +27,7 @@
 
 #feed-container h1 {
     padding-left: 1rem;
-    color: white;
+    color: var(--branco);
 }
 
 #feed-container h1 {
@@ -37,7 +37,7 @@
 .post {
     display: flex-box;
 
-    background-color: #222E50;
+    background-color: var(--secundario);
     border-radius: 32px;
     margin-bottom: 1rem;
     margin-right: 0.4rem;
@@ -49,7 +49,7 @@
 }
 
 .post-text-content {
-    color: white;
+    color: var(--branco);
     font-weight: 500;
     margin-left: 3.6rem;
 }
@@ -72,7 +72,7 @@
 .post-metadata .post-author-name {
     margin-left: 0.6rem;
     font-weight: 700;
-    color: white;
+    color: var(--branco);
 }
 
 .post-metadata .post-date {
@@ -89,11 +89,8 @@
 .post-trash-can {
     position: relative;
     float: right;
-
     transform: translateY(-7em);
-
     cursor: pointer;
-
 }
 
 .post-trash-can:hover {
@@ -103,27 +100,24 @@
 }
 
 #new-post-button {
-    background-color: #8BC34A;
+    background-color: var(--roxo-claro);
     font-weight: 700;
     font-size: 16px;
-    color: white;
+    color: var(--branco);
     min-height: 59px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
-
     margin-bottom: 1rem;
     margin-left: 0.4rem;
-
     padding-left: 1rem;
     padding-right: 1rem;
-
     cursor: pointer;
 }
 
 #modal-post-editor {
     border: none;
     border-radius: 32px;
-    background-color: #111E3E;
+    background-color: var(--roxo-escuro);
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
     width: 80%;
     max-width: 961px;
@@ -153,17 +147,15 @@
     font-size: 16px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
-
-    color: white;
+    color: var(--branco);
     padding: 1rem 1.5rem;
-
     cursor: pointer;
 }
 
 #modal-post-editor-editbox {
     width: 80%;
     height: 80%;
-    background-color: #222E50;
+    background-color: var(--secundario);
     margin-bottom: 1rem;
     margin-top: 3rem;
     border-radius: 16px;
@@ -173,19 +165,18 @@
     padding: 1rem 2rem;
     display: flex;
     gap: 0.8rem;
-
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #7E7E7E;
+    border-color: var(--secundario-claro);
 }
 
 #modal-post-editor-cancel {
-    background-color: #111E3E;
+    background-color: var(--secundario);
     margin-right: 0.25rem;
 }
 
 #modal-post-editor-publish {
-    background-color: #8BC34A;
+    background-color: var(--roxo-claro);
     margin-left: 0.25rem;
     margin-right: 3.8rem;
 }

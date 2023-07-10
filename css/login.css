@@ -7,7 +7,7 @@
 }
 
 #login-box {
-    background-color: #222E50;
+    background-color: var(--roxo-claro);
     border-radius: 10px;
     width: 38%;
     min-width: 370px;
@@ -29,29 +29,30 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: #D9D9D9;
+    background-color: var(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
-    color: #222E50;
+    color: var(--roxo-escuro);
     min-height: 59px;
     border-radius: 15px;
     margin-bottom: 2rem;
     transition: background-color 0.3s ease;
     cursor: pointer;
+    color: var(--preto);
 }
 
 #enter:hover {
-    background-color: #8BC34A;
+    background-color: var(--roxo-escuro);
 }
 
 #recover-password-link {
     margin-bottom: 2%;
-    color: #D9D9D9;
+    color: var(--branco);
 }
 
 #recover-password-link:hover {
-    color: #8BC34A;
+    color: var(--primario);
     transition: 300ms;
 }
 
@@ -76,5 +77,5 @@
 
 #popup{
     color: red;
-    background-color: #222E50;
+    background-color: var(--roxo-claro);
 }

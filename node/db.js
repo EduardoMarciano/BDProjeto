@@ -49,6 +49,7 @@ const createUsersTable = `
 const createProfessorsTable = `
   CREATE TABLE IF NOT EXISTS professors (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
 )`;
@@ -62,6 +63,7 @@ const createDepartmentsTable = `
 const createDisciplinesTable = `
   CREATE TABLE IF NOT EXISTS disciplines (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
@@ -102,7 +104,6 @@ const createCommentsTable = `
     FOREIGN KEY (turma_id) REFERENCES turmas(id)
 )`;
 
-
 const createReportsTable = `
   CREATE TABLE IF NOT EXISTS reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -116,14 +117,14 @@ const createReportsTable = `
 
 //  TABELAS INTERMEDIÁRIAS PARA REPRESENTAR AS RELAÇÕES (N:N)
 
-const createUserProfessorTable = `
-  CREATE TABLE IF NOT EXISTS user_professor (
-    user_id INT NOT NULL,
-    professor_id INT NOT NULL,
-    PRIMARY KEY (user_id, professor_id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (professor_id) REFERENCES professors(id)
-)`;
+  const createUserProfessorTable = `
+    CREATE TABLE IF NOT EXISTS user_professor (
+      user_id INT NOT NULL,
+      professor_id INT NOT NULL,
+      PRIMARY KEY (user_id, professor_id),
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (professor_id) REFERENCES professors(id)
+  )`;
 
 
 //  CRIAÇÃO DAS TABELAS NO BANCO DE DADOS

@@ -96,4 +96,3 @@ function carregarDados() {
 //Executa a função quando a página é carregada
 document.addEventListener("DOMContentLoaded", carregaPosts);
 document.addEventListener("DOMContentLoaded", carregarDados);
-document.addEventListener("DOMContentLoaded", carregaPosts());

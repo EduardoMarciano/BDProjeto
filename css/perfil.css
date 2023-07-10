@@ -9,15 +9,15 @@
     width: 55vw;
     min-width: 646px;
 
-    border-width: 0px 1px 0px 1px;
+    border-width: 5px;
     border-style: solid;
-    border-color: #7E7E7E;
+    border-color: var(--preto);
 }
 
 #content-container div div {
-    border-width: 0px 0px 1px 0px;
+    border-width: 5px;
     border-style: solid;
-    border-color: #7E7E7E;
+    border-color: var(--preto);
 }
 
 #content-container div div * {
@@ -26,6 +26,8 @@
 
 #profile-container {
     padding-bottom: 1rem;
+    background-color: var(--roxo-claro);
+    
 }
 
 #profile-container * {
@@ -33,7 +35,7 @@
 }
 
 #profile-container p {
-    color: white;
+    color: var(--branco);
     line-height: 30%;
 }
 
@@ -49,7 +51,7 @@
 
 #feed-container h1 {
     padding-left: 1rem;
-    color: white;
+    color: var(--branco);
 }
 
 #feed-container h1 {
@@ -57,14 +59,11 @@
 }
 
 #posts-container{
-
     min-height: 500px;
-
-
 }
 
 .post {
-    background-color: #222E50;
+    background-color: var(--roxo-claro);
     border-radius: 32px;
     margin-bottom: 1rem;
     margin-right: 0.4rem;
@@ -76,7 +75,7 @@
 }
 
 .post-text-content {
-    color: white;
+    color: var(--branco);
     font-weight: 500;
     margin-left: 3.6rem;
 }
@@ -99,10 +98,19 @@
 .post-metadata .post-author-name {
     margin-left: 0.6rem;
     font-weight: 700;
-    color: white;
+    color: var(--branco);
 }
 
 .post-metadata .post-date {
     font-weight: 500;
     color: #71767B;
+}
+.signin-button{
+    background-color: var(--roxo-escuro);
+    color: var(--branco);
+}
+
+#header-bar{
+    display: flex;
+    align-items: center;
 }
