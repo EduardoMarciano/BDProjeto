@@ -239,6 +239,16 @@ const createProcedureListAllTurmas = `
   END
 `;
 
+  const createProcedureQuery = `
+    CREATE PROCEDURE IF NOT EXISTS GetAllPosts()
+    BEGIN
+        SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image
+        FROM posts
+        INNER JOIN users ON posts.user_id = users.id
+        ORDER BY posts.created_time DESC;
+    END
+`;
+
 // Criação das procedures no banco de dados
 connection.query(createProcedureListAllPosts, (error) => {
   if (error) {
@@ -246,6 +256,15 @@ connection.query(createProcedureListAllPosts, (error) => {
     return;
   }
   console.log('Procedure "ListAllPosts" criada com sucesso');
+});
+
+connection.query(createProcedureQuery, (error, results) => {
+  if (error) {
+    console.error('Erro ao criar a stored procedure:', error);
+    return;
+  }
+  console.log('Stored procedure criada com sucesso!');
+  connection.end();
 });
 
 connection.query(createProcedureListUserPosts, (error) => {
