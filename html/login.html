@@ -13,19 +13,16 @@
 
     <div id="login-container">
         <div id="login-box">
-            <img src="/svg/user.svg" id="login-user-symbolic-icon" width=215 height="203">  
-            
-            <input class="form" id="login-user" type="email" name="email" placeholder="Login" required/>
+            <img src="/svg/user.svg" id="login-user-symbolic-icon" width=215 height="203">
+                <input class="form" id="login-user" type="email" name="email" placeholder="Login" required/>
 
                 <div class="password-form-container">
                     <input class="form" id="login-password-form" type="password" name="password" placeholder="Senha" required/>
                     <button class="show-password" onclick="showPassword('login-password-form', this)"><i class="fas fa-eye"></i></button>
                 </div>
-                
                 <a id="recover-password-link" href="/html/conferir-email.html">Esqueceu a senha?</a>
                 
-                <button id="enter" onclick="checarDados()">Entrar</button>
-                <p id = "popup"><p><br> 
+                <button id="enter">Entrar</button>
         </div>
     </div>
     <footer id = "footerbar-container"></footer>
