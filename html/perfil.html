@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/perfil.css">
-    <title>Blog Pedro Garcia</title>
+    <title>CJR Miniblog - Perfil</title>
 </head>
 <body>
     <header id="header-bar-container"></header>
@@ -14,43 +14,25 @@
         <div id="content-container-inner">
             <div id="profile-container">
                 <img src="/svg/user.svg" class="user-profile-picture" width=150 height="150">
-                <p id="user-name">Nome Sobrenome</p>
-                <p>🏢 Cargo</p>
-                <p>✉️ nome.sobrenome@dominio.com</p>
+                <p id = "name-area">Nome Sobrenome</p>
+                <p id = "cargo-area">🏢 Cargo</p>
+                <p id = "email-area">✉️ nome.sobrenome@dominio.com</p>
             </div>
             <div id="feed-container">
                 <h1>Publicações</h1>
                 <div id="posts-container">
-                    <div class="post">
-                        <div class="post-metadata">
-                            <img src="/svg/user.svg" class="user-profile-picture" width=48 height=48>
-                            <p class="post-author-name">Nome Sobrenome</p>
-                            <p class="post-date">&nbsp;∙ 17 de mar</p>
-                        </div>
-                        <p class="post-text-content">Esse é um post sem imagem.</p>
-                        <div class="post-image-container">
-                            <img class="post-image-content">
-                        </div>
-                    </div>
-                    <div class="post">
-                        <div class="post-metadata">
-                            <img src="/svg/user.svg" class="user-profile-picture" width=48 height=48>
-                            <p class="post-author-name">Nome Sobrenome</p>
-                            <p class="post-date">&nbsp;∙ 15 de mar</p>
-                        </div>
-                        <p class="post-text-content">Esse é um post com imagem.</p>
-                        <div class="post-image-container">
-                            <img class="post-image-content" src="/png/sangue-2.png">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <footer id = "footerbar-container"></footer>
+
     <script src="/js/reusables.js"></script>
     <script>
         createBars();
     </script>
+    <script src="/js/perfil.js"></script>
 </body>
 </html>

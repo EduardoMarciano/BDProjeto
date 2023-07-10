@@ -1,12 +1,13 @@
 #header-bar {
     display: flex;
-    background-color: var(--pastel);
+    background-color: #8BC34A;
     align-items: center;
     justify-content: space-between;
     padding-left: 2%;
     padding-right: 2%;
+    background-color: #8BC34A;
     width: 100%;
-    height: clamp(47px, 8.4vh, 100px);
+    height: clamp(47px, 8.4vh, 86px);
     box-sizing: border-box;
     top: 0%;
     position: fixed;
@@ -20,7 +21,7 @@
     padding-left: 1.65%;
     padding-right: 1.65%;
     padding-top: 4px;
-    background: var(--branco);
+    background: #D9D9D9;
 }
 
 .footer-bar{
@@ -29,9 +30,9 @@
     padding-left: 2%;
     padding-right: 2%;
 
-    height: clamp(47px, 8.4vh, 100px);
+    height: clamp(47px, 8.4vh, 70px);
 
-    background-color: var(--pastel);
+    background-color: var(--primario);
     box-sizing: border-box;
 
     text-align: center;
@@ -43,7 +44,7 @@
     font-weight: bold;
     padding: 12px 25px;
     text-decoration: none;
-    color: var(--branco);
+    color: inherit;
 }
 
 #session-buttons * {
@@ -52,15 +53,15 @@
     font-weight: bold;
     padding: 12px 25px;
     text-decoration: none;
-    color: var(--preto);
+    color: inherit;
 }
 
 #signin-button {
-    background: var(--branco);
-    color: var(--preto);
+    background: var(--secundario);
+    color: white;
 }
 
 #signup-button {
-    background: var(--branco);
-    color: var(--preto);
+    background: var(--primario);
+    color: var(--secundario);
 }

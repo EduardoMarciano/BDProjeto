@@ -24,7 +24,7 @@ app.post("/html/cadastro", (req, res) => {
       query = 'INSERT INTO users (username, password, email, role, gender, is_adm) VALUES (?, ?, ?, ?, ?, ?)';
       connection.query(query, [username, password, email, role, gender, is_adm], function(err, result) {
         console.log("Usuário Cadastrado.");
-        return res.status(200).send("Usuário Cadastrado.");
+        res.status(200).send();
       });
     } else {
       return res.status(500).send("Já há usuário com este e-mail");
@@ -140,12 +140,37 @@ app.post("/html/perfil", (req, res) => {
     else{
       return res.status(500).send("Não cadastrada.");
     }
-
   })
 });
 
+app.post("/html/perfil-post", (req, res) => {
+  const { userId } = req.body;
 
+  var query = `SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image FROM posts 
+               INNER JOIN users ON posts.user_id = users.id WHERE user_id = ?`;
 
+  connection.query(query, [userId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao carregar os posts');
+      return;
+    }
 
+    const posts = [];
+
+    for (let i = 0; i < result.length; i++) {
+      const post = result[i];
+      posts.push({
+        id: post.id,
+        user_image: post.user_image,
+        username: post.username,
+        created_time: post.created_time,
+        content: post.content
+      });
+    }
+
+    res.status(200).json(posts);
+  });
+});
 
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
