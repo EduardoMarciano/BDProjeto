@@ -1,10 +1,10 @@
-function goToPerfil(userId) {
+function goToToken(userId) {
   var enviar = document.getElementById("enter");
   
   sessionStorage.setItem('userId', userId);
 
   enviar.addEventListener("click", function() {
-    window.location.href = "perfil.html";
+    window.location.href = "conferir-token.html";
 
   });
 }
@@ -28,18 +28,17 @@ function EmailIsCorrect(email) {
 }
 
 function checarDados() {
-  
-  const email = document.getElementById('login-user').value;
-  const password = document.getElementById('login-password-form').value;
+  const email = document.getElementById('request-email-password-recovery-user').value;
+  const userId = sessionStorage.getItem('userId');
 
   if (EmailIsCorrect(email)) {
     const data = {
       email: email,
-      password: password,
+      userId: userId,
     };
 
-    fetch('http://localhost:5600/html/login', {
-      method: 'POST',
+    fetch('http://localhost:5600/html/conferir-email', {
+      method: 'POST', 
       headers: {
         'Content-Type': 'application/json'
       },
@@ -48,9 +47,8 @@ function checarDados() {
 
       if (response.status === 200) {
         console.log('Usuário tem permissão de acesso.');
-
         response.text().then(userId => {
-          goToPerfil(userId);
+          goToToken(userId);
         });
 
       } else {
@@ -61,23 +59,9 @@ function checarDados() {
           .then(popupHTML => {
             let popupContainer = document.getElementById('popup');
             popupContainer.innerHTML = popupHTML;
-            popupContainer.textContent = "E-mail e/ou senha incorreto(a).";
+            popupContainer.textContent = "E-mail não existente.";
           });
       }
     });
-  }
-}
-
-function showPassword(elementId, button) {
-  var form = document.getElementById(elementId);
-
-  if (form.type === "password") {
-    form.type = "text";
-    button.querySelector("i").classList.remove("fa-eye");
-    button.querySelector("i").classList.add("fa-eye-slash");
-  } else {
-    form.type = "password";
-    button.querySelector("i").classList.remove("fa-eye-slash");
-    button.querySelector("i").classList.add("fa-eye");
   }
 }

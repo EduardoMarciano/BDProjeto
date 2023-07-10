@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/conferir-email.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <title>Blog Pedro Garcia</title>
+    <title>CJR Miniblog - request-email-password-recovery</title>
 </head>
 <body>
     <header id="header-bar-container"></header>
@@ -15,19 +15,19 @@
         
         <div id="request-email-password-recovery-box">
             <img src="/svg/user.svg" id="login-user-symbolic-icon" width=215 height="203">
-                <p id = "advise-text">Enviaremos um token de resgate para o e-mail informado</p><br>
+                <p id= "advise-text">Enviaremos um token de resgate para o e-mail informado</p><br>
                 <p id = "popup"></p>
                 <input class="form" id="request-email-password-recovery-user" type="email" name="email" placeholder="Informe seu e-mail" required/>
 
-                <a id="recover-password-link" href="/html/cadastro.html">Não possui login? <u>Acesse aqui!</u></a>
+                <a id="recover-password-link" href="/html/cadastro.html">Não possui login? <u>Acesse aqui!</u></a><br>
 
-                <button id="enter" onclick="EmailIsCorrect()">Enviar</button>
+                <button id="enter" onclick="checarDados()">Enviar</button>
         </div>
     </div>
     <footer id = "footerbar-container"></footer>
 
     <script src="/js/reusables.js"></script>
-    <script src="/js/checar-email.js"></script>
+    <script src="/js/conferir-email.js"></script>
     <script>
         createBars();
     </script>
