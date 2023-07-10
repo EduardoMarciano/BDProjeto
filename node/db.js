@@ -239,7 +239,7 @@ const createProcedureListAllTurmas = `
   END
 `;
 
-  const createProcedureQuery = `
+const createProcedureQuery = `
     CREATE PROCEDURE IF NOT EXISTS GetAllPosts()
     BEGIN
         SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image
@@ -264,7 +264,6 @@ connection.query(createProcedureQuery, (error, results) => {
     return;
   }
   console.log('Stored procedure criada com sucesso!');
-  connection.end();
 });
 
 connection.query(createProcedureListUserPosts, (error) => {
