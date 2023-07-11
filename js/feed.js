@@ -23,8 +23,13 @@ function carregaPosts() {
         }
       })
       .then(posts => {
+        posts = posts[0];
+
         for (let i = 0; i < posts.length; i++) {
           const post = posts[i];
+
+          console.log(post);
+          console.log(i);
           var url_img_user = '/svg/user.svg';
   
           const postHTML = `
@@ -46,4 +51,6 @@ function carregaPosts() {
         console.error(error);
       });
   }
+
+
   document.addEventListener("DOMContentLoaded", carregaPosts);

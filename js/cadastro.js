@@ -30,6 +30,7 @@ function enviarDados() {
   const role = document.getElementById('signup-role').value;
   const email = document.getElementById('signup-email').value;
   const password = document.getElementById('signup-password-form').value;
+  const course = document.getElementById('signup-course').value;
 
   if (EmailIsCorrect(email)) {
     const data = {
@@ -38,7 +39,8 @@ function enviarDados() {
       email: email,
       role: role,
       gender: gender,
-      is_adm: false
+      is_adm: false,
+      course: course,
     };
 
     fetch('http://localhost:5600/html/cadastro', {

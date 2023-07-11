@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const connection = require('./geraEntidades.js');
 const { gerarToken, enviarEmail } = require('./sendMail.js');
 const app = express();
-const port = 5600;
+const port = 5600;    
+const { differenceInHours, differenceInDays, differenceInWeeks } = require('date-fns');
 
 app.use(bodyParser.json());
 
@@ -16,13 +17,13 @@ app.use(function(req, res, next) {
 });
 
 app.post("/html/cadastro", (req, res) => {
-  const {username, password, email, role, gender, is_adm} = req.body;
+  const {username, password, email, role, gender, is_adm, course} = req.body;
   var query = 'SELECT * FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
     if (result.length <= 0) {
-      query = 'INSERT INTO users (username, password, email, role, gender, is_adm) VALUES (?, ?, ?, ?, ?, ?)';
-      connection.query(query, [username, password, email, role, gender, is_adm], function(err, result) {
+      query = 'INSERT INTO users (username, password, email, role, gender, is_adm, course) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      connection.query(query, [username, password, email, role, gender, is_adm, course], function(err, result) {
         console.log("Usuário Cadastrado.");
         res.status(200).send();
       });
@@ -168,6 +169,48 @@ app.post("/html/perfil-post", (req, res) => {
         content: post.content
       });
     }
+
+    res.status(200).json(posts);
+  });
+});
+
+app.post("/html/feed-post", (req, res) => {
+  const { userId } = req.body;
+
+  var query = `CALL GetAllPosts()`;
+
+  connection.query(query, function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao carregar os posts');
+      return;
+    }
+    
+    const posts = JSON.parse(JSON.stringify(result));
+    posts[0].forEach((post) => {
+
+      const postDate = new Date(post.created_time);
+      
+
+      const hoursDiff = differenceInHours(new Date(), postDate);
+      const daysDiff = differenceInDays(new Date(), postDate);
+      const weeksDiff = differenceInWeeks(new Date(), postDate);
+      
+      let formattedDuration = '';
+      
+      if (hoursDiff < 24) {
+        formattedDuration = `${Math.floor(hoursDiff)} horas atrás`;
+      } else if (hoursDiff < 48) {
+        formattedDuration = ' 1 dia atrás';
+      } else if (daysDiff < 7) {
+        formattedDuration = `${Math.floor(daysDiff)}  dias atrás`;
+      } else {
+        formattedDuration = `${Math.floor(weeksDiff)}  semanas atrás`;
+      }
+      
+      // Atualize a propriedade 'created_time' com a data tratada
+      post.created_time = formattedDuration;
+    });
 
     res.status(200).json(posts);
   });
