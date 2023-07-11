@@ -37,6 +37,11 @@ function carregaPosts() {
             <p class="post-text-content">${post.content}</p>
             <div class="post-image-container">
             </div>
+            <div class="post-trash-can" id = "${post.id}">
+              <button class="post-trash-can" id="${post.id}" onclick ="deletePost(this.id)">
+                <img src="/svg/trash-symbolic.svg" width="24" height="24" alt="Lixeira">
+              </button>
+            </div>
           </div>
         `;
         postContainer.innerHTML += postHTML;
@@ -92,6 +97,89 @@ function carregarDados() {
         console.log('Informações carregadas.');
       })
   }
+
+  function setupModalPostEditor() {
+    const modalPostEditor = {
+      close: function() {
+        modalPostEditor.dialogElement.style.display = "none";
+        modalPostEditor.dialogElement.close();
+      },
+      open: function() {
+        modalPostEditor.dialogElement.style.display = "flex";
+        modalPostEditor.dialogElement.showModal();
+      },
+      publish: function() {
+        releasePost();
+        modalPostEditor.dialogElement.style.display = "none";
+        modalPostEditor.dialogElement.close();
+      },
+  
+      dialogElement: document.getElementById("modal-post-editor"),
+      openButton: document.getElementById("new-post-button"),
+      closeButton: document.getElementById("modal-post-editor-cancel"),
+      publishButton: document.getElementById("modal-post-editor-publish"),
+    };
+  
+    modalPostEditor.openButton.onclick = modalPostEditor.open;
+    modalPostEditor.closeButton.onclick = modalPostEditor.close;
+    modalPostEditor.publishButton.onclick = modalPostEditor.publish;
+  }
+
+function releasePost(){
+  var userId = parseInt(sessionStorage.getItem('userId'));
+
+  var content = document.getElementById("new-content-post").value;
+  console.log(content);
+  const data = {
+    userId: userId,
+    content: content,
+  };
+
+  fetch('http://localhost:5600/html/perfil-new-post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        carregaPosts();
+        carregarDados();
+        console.log("Post foi criado.")
+      }
+      else{
+        console.log("problema interno no servidor.")
+      }
+    })
+}
+
+
+function deletePost(postId) {
+  var userId = parseInt(sessionStorage.getItem('userId'));
+  const data = {
+    userId: userId,
+    postId: postId,
+  };
+
+  fetch('http://localhost:5600/html/perfil-delete-post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        carregaPosts();
+        carregarDados();
+        console.log("Post foi deletado.")
+      }
+      else {
+        console.log("Problema interno no servidor.")
+      }
+    })
+}
 
 //Executa a função quando a página é carregada
 document.addEventListener("DOMContentLoaded", carregaPosts);

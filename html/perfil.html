@@ -30,8 +30,11 @@
                 <p id = "name-area">Nome Sobrenome</p>
                 <p id = "cargo-area">🏢 Cargo</p>
                 <p id = "email-area">✉️ nome.sobrenome@dominio.com</p>
-                <button id="Excluir" onclick="checarDados()">Excluir Conta</button>
-                <button id="enter" onclick="checarDados()">Editadar Dados da Conta</button>
+
+                <button id="new-post-button" onclick="setupModalPostEditor()">Nova Publicação</button>
+                <button id="enter" onclick="">Editar Dados da Conta</button>
+                <button id="Excluir" onclick="">Excluir Conta</button>
+                
             </div>
             <div id="feed-container">
                 <h1>Publicações</h1>
@@ -42,12 +45,23 @@
         </div>
     </div>
 
+    <dialog id="modal-post-editor">
+        <div id="modal-post-editor-editbox">
+            <textarea id="new-content-post" name="texto" rows="20" cols="90"></textarea>
+        </div>
+        <div id="modal-post-editor-buttons">
+            <button id="modal-post-editor-publish" onclick="releasePost()">Publicar</button>
+            <button id="modal-post-editor-cancel">Cancelar</button>
+        </div>
+    </dialog>
+
     <footer id = "footerbar-container"></footer>
 
     <script src="/js/reusables.js"></script>
     <script>
         createBars();
     </script>
+
     <script src="/js/perfil.js"></script>
 </body>
 </html>

@@ -148,7 +148,8 @@ app.post("/html/perfil-post", (req, res) => {
   const { userId } = req.body;
 
   var query = `SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image FROM posts 
-               INNER JOIN users ON posts.user_id = users.id WHERE user_id = ?`;
+               INNER JOIN users ON posts.user_id = users.id WHERE user_id = ?
+               ORDER BY posts.created_time DESC`;
 
   connection.query(query, [userId], function(err, result) {
     if (err) {
@@ -161,6 +162,28 @@ app.post("/html/perfil-post", (req, res) => {
 
     for (let i = 0; i < result.length; i++) {
       const post = result[i];
+
+      const postDate = new Date(post.created_time);
+
+      const hoursDiff = differenceInHours(new Date(), postDate);
+      const daysDiff = differenceInDays(new Date(), postDate);
+      const weeksDiff = differenceInWeeks(new Date(), postDate);
+
+      let formattedDuration = '';
+
+      if (hoursDiff < 24) {
+        formattedDuration = `${Math.floor(hoursDiff)} horas atrás`;
+      } else if (hoursDiff < 48) {
+        formattedDuration = '1 dia atrás';
+      } else if (daysDiff < 7) {
+        formattedDuration = `${Math.floor(daysDiff)} dias atrás`;
+      } else {
+        formattedDuration = `${Math.floor(weeksDiff)} semanas atrás`;
+      }
+
+      // Atualize a propriedade 'created_time' com a data tratada
+      post.created_time = formattedDuration;
+
       posts.push({
         id: post.id,
         user_image: post.user_image,
@@ -173,6 +196,7 @@ app.post("/html/perfil-post", (req, res) => {
     res.status(200).json(posts);
   });
 });
+
 
 app.post("/html/feed-post", (req, res) => {
   const { userId } = req.body;
@@ -213,6 +237,41 @@ app.post("/html/feed-post", (req, res) => {
     });
 
     res.status(200).json(posts);
+  });
+});
+
+app.post('/html/perfil-new-post', (req, res) => {
+  console.log("oi");
+  const { userId, content } = req.body;
+  
+  console.log(userId, content);
+
+  var query = `INSERT INTO posts (user_id, content, created_time) VALUES (?, ?, NOW())`;
+
+  connection.query(query, [userId, content], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao criar o novo post');
+      return;
+    }
+
+    res.status(200).send('Novo post criado com sucesso');
+  });
+});
+
+
+app.post('/html/perfil-delete-post', (req, res) => {
+  const { userId, postId } = req.body;
+  var query = `DELETE FROM posts WHERE id = ? `;
+
+  connection.query(query, [postId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao deletar o novo post');
+      return;
+    }
+
+    res.status(200).send('Post deletado com sucesso');
   });
 });
 
