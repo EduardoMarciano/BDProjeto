@@ -52,6 +52,7 @@ const createProfessorsTable = `
     name VARCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
+    ON DELETE CASCADE
 )`;
 
 const createDepartmentsTable = `
@@ -67,6 +68,7 @@ const createDisciplinesTable = `
     name VARCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
+    ON DELETE CASCADE
 )`;
 
 const createTurmasTable = `
@@ -74,8 +76,10 @@ const createTurmasTable = `
     id INT AUTO_INCREMENT PRIMARY KEY,
     professor_id INT NOT NULL,
     discipline_id INT NOT NULL,
-    FOREIGN KEY (professor_id) REFERENCES professors(id),
+    FOREIGN KEY (professor_id) REFERENCES professors(id)
+    ON DELETE CASCADE,
     FOREIGN KEY (discipline_id) REFERENCES disciplines(id)
+    ON DELETE CASCADE
 )`;
 
 const createPostsTable = `
@@ -86,6 +90,7 @@ const createPostsTable = `
     likes INT,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE
 )`;
 
 const createCommentsTable = `
@@ -98,7 +103,8 @@ const createCommentsTable = `
     content VARCHAR(255) NOT NULL,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     likes INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE,
     FOREIGN KEY (professor_id) REFERENCES professors(id),
     FOREIGN KEY (discipline_id) REFERENCES disciplines(id),
     FOREIGN KEY (turma_id) REFERENCES turmas(id)
@@ -109,23 +115,22 @@ const createReportsTable = `
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     comment_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE,
     FOREIGN KEY (comment_id) REFERENCES comments(id)
+    ON DELETE CASCADE
 )`;
 
-
-
-//  TABELAS INTERMEDIÁRIAS PARA REPRESENTAR AS RELAÇÕES (N:N)
-
-  const createUserProfessorTable = `
-    CREATE TABLE IF NOT EXISTS user_professor (
-      user_id INT NOT NULL,
-      professor_id INT NOT NULL,
-      PRIMARY KEY (user_id, professor_id),
-      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (professor_id) REFERENCES professors(id)
-  )`;
-
+const createUserProfessorTable = `
+  CREATE TABLE IF NOT EXISTS user_professor (
+    user_id INT NOT NULL,
+    professor_id INT NOT NULL,
+    PRIMARY KEY (user_id, professor_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE,
+    FOREIGN KEY (professor_id) REFERENCES professors(id)
+    ON DELETE CASCADE
+)`;
 
 //  CRIAÇÃO DAS TABELAS NO BANCO DE DADOS
 

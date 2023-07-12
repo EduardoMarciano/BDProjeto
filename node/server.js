@@ -275,4 +275,36 @@ app.post('/html/perfil-delete-post', (req, res) => {
   });
 });
 
+app.post('/html/perfil-delete-user', (req, res) => {
+  const {userId} = req.body;
+  var query = `DELETE FROM users WHERE id = ? `;
+
+  connection.query(query, [userId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao deletar o user');
+      return;
+    }
+
+    res.status(200).send('User deletado com sucesso');
+  });
+});
+
+app.post("/html/editar-dados", (req, res) => {
+  const { username, email, role, gender, is_adm, course, userId } = req.body;
+  var query = 'SELECT * FROM users WHERE email = ?';
+
+  connection.query(query, [email], function(err, result) {
+    if (result.length <= 0) {
+      query = 'UPDATE users SET username = ?, email = ?, role = ?, gender = ?, is_adm = ?, course = ? WHERE id = ?';
+      connection.query(query, [username, email, role, gender, is_adm, course, userId], function(err, result) {
+        console.log("Dados do usuário atualizados.");
+        res.status(200).send();
+      });
+    } else {
+      return res.status(500).send("Já há usuário com este e-mail");
+    }
+  });
+});
+
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

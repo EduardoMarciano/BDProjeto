@@ -130,6 +130,35 @@
     padding-right: 1rem;
     cursor: pointer;
 }
+#Excluir {
+    background-color: red;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--branco);
+    min-height: 59px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    margin-left: 45%;
+}
+#Editar {
+    background-color: var(--roxo-escuro);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--branco);
+    min-height: 59px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
 
 #modal-post-editor {
     border: none;
@@ -212,6 +241,19 @@
 }
 
 .post-trash-can:hover {
+    background-color: red;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+.post-reply-button {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    background-color: var(--roxo-claro);
+}
+
+.post-reply-button:hover {
     background-color: red;
     border-radius: 4px;
     transition: 100ms;

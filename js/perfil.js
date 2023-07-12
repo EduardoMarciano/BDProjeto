@@ -37,7 +37,10 @@ function carregaPosts() {
             <p class="post-text-content">${post.content}</p>
             <div class="post-image-container">
             </div>
-            <div class="post-trash-can" id = "${post.id}">
+            <div class="post-reply-button">
+              <img src="/svg/edit.svg", width=20, height=20>
+            </div>
+            <div class="post-trash-can">
               <button class="post-trash-can" id="${post.id}" onclick ="deletePost(this.id)">
                 <img src="/svg/trash-symbolic.svg" width="24" height="24" alt="Lixeira">
               </button>
@@ -180,6 +183,39 @@ function deletePost(postId) {
       }
     })
 }
+
+function deleteUser() {
+  var userId = parseInt(sessionStorage.getItem('userId'));
+  const data = {
+    userId: userId,
+  };
+
+  fetch('http://localhost:5600/html/perfil-delete-user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        goToLogin();
+      }
+      else {
+        console.log("Problema interno no servidor.")
+      }
+    })
+}
+
+function goToLogin() {
+  sessionStorage.removeItem('userId');
+  window.location.href = "login.html";
+}
+
+function goToEditar() {
+  window.location.href = "editar-dados.html";
+}
+
 
 //Executa a função quando a página é carregada
 document.addEventListener("DOMContentLoaded", carregaPosts);
