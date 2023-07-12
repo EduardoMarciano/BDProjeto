@@ -241,7 +241,6 @@ app.post("/html/feed-post", (req, res) => {
 });
 
 app.post('/html/perfil-new-post', (req, res) => {
-  console.log("oi");
   const { userId, content } = req.body;
   
   console.log(userId, content);
@@ -337,5 +336,82 @@ app.post("/html/feed-professor", (req, res) => {
   });
 });
 
+
+app.post('/html/feed-professor-new-comment', (req, res) => {
+  const { userId, professorId, content } = req.body;
+  
+  console.log(professorId, content);
+
+  const query = `INSERT INTO comments (user_id, professor_id, content) VALUES (?, ?, ?)`;
+
+  connection.query(query, [userId, professorId, content], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao criar o novo comentário');
+      return;
+    }
+
+    res.status(200).send('Novo comentário criado com sucesso');
+  });
+});
+
+
+
+app.post("/html/feed-professor-comments", (req, res) => {
+  const { professorId } = req.body;
+
+  var query = `SELECT
+                comments.id AS comment_id,
+                comments.content AS comment_content,
+                comments.created_time AS comment_created_time,
+                users.username AS user_username,
+                users.image AS user_image
+              FROM
+                comments
+                JOIN users ON comments.user_id = users.id
+              WHERE
+                comments.professor_id = ?
+              ORDER BY
+                comments.created_time DESC`;
+
+  connection.query(query, [professorId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao carregar os comentários');
+      return;
+    }
+    const comments = JSON.parse(JSON.stringify(result));
+
+    // Tratar a data de criação do comentário
+    comments.forEach(comment => {
+      const commentDate = new Date(comment.comment_created_time);
+      const currentDate = new Date();
+      const timeDiff = Math.abs(currentDate - commentDate);
+      const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+      if (daysDiff === 0) {
+        // Comentário criado hoje
+        const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+        if (hoursDiff > 1) {
+          comment.comment_created_time = `${hoursDiff} horas atrás`;
+        } else {
+          const minutesDiff = Math.floor(timeDiff / (1000 * 60));
+          comment.comment_created_time = `${minutesDiff} minutos atrás`;
+        }
+      } else if (daysDiff === 1) {
+        // Comentário criado ontem
+        comment.comment_created_time = '1 dia atrás';
+      } else {
+        // Comentário criado há mais de um dia
+        comment.comment_created_time = `${daysDiff} dias atrás`;
+      }
+    });
+
+    // Ordenar os comentários pelo mais novo primeiro
+    comments.sort((a, b) => new Date(b.comment_created_time) - new Date(a.comment_created_time));
+
+    res.status(200).json(comments);
+  });
+});
 
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

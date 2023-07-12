@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/feed-professor.css">
     <title>CPedro Garcia Blog  - Perfil</title>
 </head>
 <body>
@@ -33,6 +33,16 @@
             </div>
         </div>
     </div>
+
+    <dialog id="modal-post-editor">
+        <div id="modal-post-editor-editbox">
+            <textarea id="new-content-post" name="texto" rows="20" cols="90"></textarea>
+        </div>
+        <div id="modal-post-editor-buttons">
+            <button id="modal-post-editor-publish" onclick="publishModal()">Publicar</button>
+            <button id="modal-post-editor-cancel" onclick="closeModal()">Cancelar</button>
+        </div>
+    </dialog>
 
     <footer id = "footerbar-container"></footer>
 
