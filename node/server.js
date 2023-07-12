@@ -307,4 +307,35 @@ app.post("/html/editar-dados", (req, res) => {
   });
 });
 
+app.post("/html/feed-professor", (req, res) => {
+  const { userId } = req.body;
+
+  var query = `SELECT DISTINCT
+                professors.id AS professor_id,
+                professors.name AS professor_name,
+                departments.name AS department_name,
+                disciplines.code AS discipline_code,
+                disciplines.name AS discipline_name,
+                turmas.id AS turma_id
+              FROM
+                professors
+                JOIN departments ON professors.department_id = departments.id
+                JOIN disciplines ON disciplines.department_id = departments.id
+                JOIN turmas ON turmas.discipline_id = disciplines.id
+              WHERE
+                professors.id = turmas.professor_id;
+`;
+
+  connection.query(query, function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao carregar os posts');
+      return;
+    }
+    const posts = JSON.parse(JSON.stringify(result));
+    res.status(200).json(posts);
+  });
+});
+
+
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
