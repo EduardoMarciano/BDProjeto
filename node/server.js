@@ -342,7 +342,7 @@ app.post('/html/feed-professor-new-comment', (req, res) => {
   
   console.log(professorId, content);
 
-  const query = `INSERT INTO comments (user_id, professor_id, content) VALUES (?, ?, ?)`;
+  const query = `INSERT INTO comments (user_id, professor_id, content, likes) VALUES (?, ?, ?, 0)`;
 
   connection.query(query, [userId, professorId, content], function(err, result) {
     if (err) {
@@ -361,18 +361,21 @@ app.post("/html/feed-professor-comments", (req, res) => {
   const { professorId } = req.body;
 
   var query = `SELECT
-                comments.id AS comment_id,
-                comments.content AS comment_content,
-                comments.created_time AS comment_created_time,
-                users.username AS user_username,
-                users.image AS user_image
-              FROM
-                comments
-                JOIN users ON comments.user_id = users.id
-              WHERE
-                comments.professor_id = ?
-              ORDER BY
-                comments.created_time DESC`;
+        comments.id AS comment_id,
+        comments.content AS comment_content,
+        comments.created_time AS comment_created_time,
+        comments.likes AS comment_likes,
+        comments.user_id AS user_id,
+        users.username AS user_username,
+        users.image AS user_image
+  
+    FROM
+      comments
+      JOIN users ON comments.user_id = users.id
+    WHERE
+      comments.professor_id = ?
+    ORDER BY
+      comments.created_time DESC`;
 
   connection.query(query, [professorId], function(err, result) {
     if (err) {
@@ -411,6 +414,67 @@ app.post("/html/feed-professor-comments", (req, res) => {
     comments.sort((a, b) => new Date(b.comment_created_time) - new Date(a.comment_created_time));
 
     res.status(200).json(comments);
+  });
+});
+
+app.post('/html/feed-professor-like', (req, res) => {
+  const { userId, commentId } = req.body;
+
+  // Atualizar o número de curtidas no banco de dados
+  const updateQuery = `UPDATE comments SET likes = likes + 1 WHERE id = ?`;
+
+  connection.query(updateQuery, [commentId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao atualizar o número de curtidas');
+      return;
+    }
+    // Obter o novo número de curtidas do comentário
+    const selectQuery = `SELECT likes FROM comments WHERE id = ?`;
+
+    connection.query(selectQuery, [commentId], function(err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erro ao obter o número de curtidas atualizado');
+        return;
+      }
+
+      const updatedLikes = result[0].likes;
+      res.status(200).json({ likes: updatedLikes });
+    });
+  });
+});
+
+
+app.post('/html/perfil-update-post', (req, res) => {
+  const { postId, content } = req.body;
+
+  // Atualizar o conteúdo do post no banco de dados
+  const updateQuery = `UPDATE posts SET content = ? WHERE id = ?`;
+
+  connection.query(updateQuery, [content, postId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao atualizar o post');
+      return;
+    }
+
+    res.status(200).send('Post atualizado com sucesso');
+  });
+});
+
+
+app.post('/html/feed-professor-delete-comment', (req, res) => {
+  const { userId, commentId } = req.body;
+  var query = `DELETE FROM comments WHERE id = ? `;
+
+  connection.query(query, [commentId ], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao deletar o novo post');
+      return;
+    }
+    res.status(200).send('Comment deletado com sucesso');
   });
 });
 

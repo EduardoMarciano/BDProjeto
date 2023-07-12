@@ -8,9 +8,7 @@
     height: fit-content;
     width: 55vw;
     min-width: 646px;
-
     border-width: 5px;
-    border-style: solid;
     border-color: var(--preto);
 }
 
@@ -72,6 +70,18 @@
     padding-left:1rem;
     padding-right: 1rem;
     padding-bottom: 2rem;
+}
+.post-professor {
+    background-color: #670010;
+    border-radius: 32px;
+    margin-bottom: 1rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+    padding-top: 0.5rem;
+    padding-left:1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    color: var(--preto);
 }
 
 .post-text-content {
@@ -250,11 +260,33 @@
     position: relative;
     float: left;
     cursor: pointer;
-    background-color: var(--roxo-claro);
+    background-color: #670010;
 }
 
 .post-reply-button:hover {
     background-color: greenyellow;
     border-radius: 4px;
     transition: 100ms;
+}
+
+
+.post-like-button {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    background-color: var(--roxo-claro);
+}
+
+.post-like-button:hover {
+    background-color: greenyellow;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+.likes-count{
+    position: relative;
+    float: left;
+    background-color: var(--roxo-claro);
+    margin-bottom: 10%;
+
 }

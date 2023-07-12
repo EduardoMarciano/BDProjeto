@@ -37,8 +37,12 @@ function carregaPosts() {
             <p class="post-text-content">${post.content}</p>
             <div class="post-image-container">
             </div>
+            
             <div class="post-reply-button">
-              <img src="/svg/edit.svg", width=20, height=20>
+              <button class="post-trash-can" id="${post.id+"R"}" onclick ="openModal(this.id)">
+                <img src="/svg/edit.svg", width=20, height=20>
+              </button>
+
             </div>
             <div class="post-trash-can">
               <button class="post-trash-can" id="${post.id}" onclick ="deletePost(this.id)">
@@ -55,6 +59,24 @@ function carregaPosts() {
     .catch(error => {
       console.error(error);
     });
+}
+
+function openModal(postId) {
+  postId = postId.slice(0, -1);
+  sessionStorage.setItem('postId', postId);
+  const dialogElement = document.getElementById('modal-post-editor-2');
+  dialogElement.style.display = 'flex';
+  dialogElement.showModal();
+}
+function closeModal() {
+  const dialogElement = document.getElementById("modal-post-editor-2");
+  dialogElement.style.display = "none";
+  dialogElement.close();
+}
+function publishModal() {
+  const postId = sessionStorage.getItem('postId');
+  releaseUpdate(postId);
+  closeModal();
 }
 
 
@@ -214,6 +236,30 @@ function goToLogin() {
 
 function goToEditar() {
   window.location.href = "editar-dados.html";
+}
+
+function releaseUpdate(postId) {
+  var content = document.getElementById("new-content-post-2").value;
+  const data = {
+    postId: postId,
+    content: content
+  };
+
+  fetch('http://localhost:5600/html/perfil-update-post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        carregaPosts();
+        console.log("Post atualizado com sucesso.")
+      } else {
+        console.log("Problema interno no servidor.")
+      }
+    });
 }
 
 
