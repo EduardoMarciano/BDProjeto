@@ -124,6 +124,8 @@ const createReportsTable = `
     ON DELETE CASCADE
 )`;
 
+// TABELA PARA O RELACIONAMENTO (N:N)
+
 const createUserProfessorTable = `
   CREATE TABLE IF NOT EXISTS user_professor (
     user_id INT NOT NULL,
