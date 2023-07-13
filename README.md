@@ -46,3 +46,6 @@
   	node server.js
 ## Executar código:
 #### Para rodar o sistema, agora, basta apenas usar o Live Server, https://open-vsx.org/extension/ritwickdey/LiveServer, na página de login. Lembre-se de deixar o server.js rodando enquanto a utilização do sistema.
+## Modelo Conceitual:
+## Modelo Relacional:
+
