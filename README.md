@@ -47,5 +47,6 @@
 ## Executar código:
 #### Para rodar o sistema, agora, basta apenas usar o Live Server, https://open-vsx.org/extension/ritwickdey/LiveServer, na página de login. Lembre-se de deixar o server.js rodando enquanto a utilização do sistema.
 ## Modelo Conceitual:
+![Diagrama de Entidade-Relacionamento](MER/ModeloConceitual.png)
 ## Modelo Relacional:
-
+![Diagrama de Entidade-Relacionamento 2](MER/ModeloRelacional.png)
