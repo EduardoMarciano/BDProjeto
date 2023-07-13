@@ -304,3 +304,7 @@
     border-radius: 4px;
     transition: 100ms;
 }
+
+#posts-container{
+    min-height: 840px;
+}
