@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/feed.css">
+    <link rel="stylesheet" href="/css/feed-turmas.css">
     <title>CPedro Garcia Blog  - Perfil</title>
 </head>
 <body>
+    <header id="header-bar-container"></header>
     <div id="header-bar">
         <div id="header-logo-button">
             <img src="/svg/database_icon-icons.com_70204.svg" alt="Logo da PEDRO GARCIA" width=63 height=30>
@@ -15,7 +16,6 @@
         <div id="session-buttons">
             <a href="/html/feed.html" id="signin-button">Feed</a>
             <a href="/html/perfil.html" id="signin-button">Perfil</a>
-            <a href="/html/feed-professor.html" id="signin-button">Professores</a>
             <a href="/html/feed-turmas.html" id="signin-button">Turmas</a>
             <a href="/html/feed-denuncias.html" id="signin-button" class="lado">Denúncias</a>
             <a href="/html/login.html" id="signin-button" class="lado">Sair</a>
@@ -24,62 +24,22 @@
 
     <div id="content-container">
         <div id="content-container-inner">
-            <div id="feed-container">
-                <button id="new-post-button">Criar Publicação</button>
+            <div id="feed-container">                
                 <div id="posts-container">
-                    <div class="post">
-                        <div class="post-metadata">
-                            <img src="/svg/user.svg" class="user-profile-picture" width=48 height=48>
-                            <p class="post-author-name">Nome Sobrenome</p>
-                            <p class="post-date">&nbsp;∙ 17 de mar</p>
-                        </div>
-                        <p class="post-text-content">Esse é um post sem imagem.</p>
-                        <div class="post-image-container">
-                            <img class="post-image-content">
-                        </div>
-                        <div class="post-reply-button">
-                            <img src="/svg/chat-bubble-symbolic.svg", width=20, height=20>
-                        </div>
-                        <div class="post-trash-can">
-                            <img src="/svg/trash-symbolic.svg", width=24, height=24>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <div class="post-metadata">
-                            <img src="/svg/user.svg" class="user-profile-picture" width=48 height=48>
-                            <p class="post-author-name">Nome Sobrenome</p>
-                            <p class="post-date">&nbsp;∙ 15 de mar</p>
-                        </div>
-                        <p class="post-text-content">Esse é um post com imagem.</p>
-                        <div class="post-image-container">
-                            <img class="post-image-content" src="/png/sangue-2.png">
-                        </div>
-                        <div class="post-reply-button">
-                            <img src="/svg/chat-bubble-symbolic.svg", width=20, height=20>
-                        </div>
-                        <div class="post-trash-can">
-                            <img src="/svg/trash-symbolic.svg", width=24, height=24>
-                        </div>
-                    </div>
+
+                        
                 </div>
             </div>
         </div>
     </div>
+
     <dialog id="modal-post-editor">
         <div id="modal-post-editor-editbox">
-            <div id="modal-post-editor-toolstrip">
-                <img src="/svg/bold-symbolic.svg" width="14" height="18">
-                <img src="/svg/italic-symbolic.svg" width="18" height="18">
-                <img src="/svg/heading-symbolic.svg" width="18" height="18">
-                <img src="/svg/link-symbolic.svg" width="18" height="18">
-                <img src="/svg/image-symbolic.svg" width="18" height="18">
-                <img src="/svg/question-circle-symbolic.svg" width="18" height="18">
-
-            </div>
+            <textarea id="new-content-post" name="texto" rows="20" cols="90"></textarea>
         </div>
         <div id="modal-post-editor-buttons">
-            <button id="modal-post-editor-publish">Publicar</button>
-            <button id="modal-post-editor-cancel">Cancelar</button>
+            <button id="modal-post-editor-publish" onclick="publishModal()">Publicar</button>
+            <button id="modal-post-editor-cancel" onclick="closeModal()">Cancelar</button>
         </div>
     </dialog>
 
@@ -88,32 +48,7 @@
     <script src="/js/reusables.js"></script>
     <script>
         createBars();
-
-        const modalPostEditor = {
-            setupEventListeners: function() {
-                modalPostEditor.openButton.onclick = this.open;
-                modalPostEditor.closeButton.onclick = this.close;
-                modalPostEditor.publishButton.onclick = this.publish;
-            },
-            close: function() {
-                modalPostEditor.dialogElement.style.display = "none";
-                modalPostEditor.dialogElement.close();
-            },
-            open: function() {
-                modalPostEditor.dialogElement.style.display = "flex";
-                modalPostEditor.dialogElement.showModal();
-            },
-            publish: function() {
-                console.log("Requested to publish post");
-            },
-
-            dialogElement: document.getElementById("modal-post-editor"),
-            openButton: document.getElementById("new-post-button"),
-            closeButton: document.getElementById("modal-post-editor-cancel"),
-            publishButton: document.getElementById("modal-post-editor-publish"),
-        };
-
-        modalPostEditor.setupEventListeners();
     </script>
+    <script src="/js/feed-turmas.js"></script>
 </body>
 </html>

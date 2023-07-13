@@ -76,6 +76,9 @@ const createTurmasTable = `
     id INT AUTO_INCREMENT PRIMARY KEY,
     professor_id INT NOT NULL,
     discipline_id INT NOT NULL,
+    local VARCHAR(255) NOT NULL,
+    horario VARCHAR(255) NOT NULL,
+    numero INT NOT NULL,
     FOREIGN KEY (professor_id) REFERENCES professors(id)
     ON DELETE CASCADE,
     FOREIGN KEY (discipline_id) REFERENCES disciplines(id)

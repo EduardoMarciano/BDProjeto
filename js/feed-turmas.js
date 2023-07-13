@@ -99,6 +99,11 @@ async function carregaComment(professorId) {
                   <img src="/svg/trash-symbolic.svg" width="24" height="24" alt="Lixeira">
                 </button>
               </div>
+              <div class="post-report">
+              <button class="post-report" id="${comment.comment_id + 'R'}" onclick="reportComment(this.id, ${comment.user_id})">
+                <img src="/svg/report.svg" width="24" height="24" alt="Lixeira">
+              </button>
+            </div>
             
               
           </div>
@@ -118,7 +123,11 @@ async function carregaComment(professorId) {
 
 function checkUserIdVisibility(userId, commentId, ID) {
   const trashCanElement = document.getElementById(ID+'T');
-  if (userId === commentId) {
+  var isAdm = sessionStorage.getItem('is_adm');
+
+  console.log(isAdm);
+  
+  if ((userId === commentId) || (parseInt(isAdm) === 1)) {
     trashCanElement.style.display = 'block';
   } else {
     trashCanElement.style.display = 'none';
@@ -221,5 +230,29 @@ function deleteComment(commentId) {
     })
 }
 
+function reportComment(commentId, user_id) {
+  commentId = commentId.slice(0, -1);;
+  const data = {
+    userId: user_id,
+    commentId: commentId,
+  };
+
+  fetch('http://localhost:5600/html/feed-professor-report-comment', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        carregaProfessor();
+        console.log("Comment foi deletado.")
+      }
+      else {
+        console.log("Problema interno no servidor.")
+      }
+    })
+}
 //Executa a função quando a página é carregada
 document.addEventListener("DOMContentLoaded", carregaProfessor);

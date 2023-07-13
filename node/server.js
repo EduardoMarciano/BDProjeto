@@ -34,15 +34,20 @@ app.post("/html/cadastro", (req, res) => {
 });
 
 app.post("/html/login", (req, res) => {
-  const {email, password} = req.body;
-  var query = 'SELECT users.username, users.password, users.id FROM users WHERE email = ?';
+  const { email, password } = req.body;
+  var query = 'SELECT users.username, users.password, users.id, users.is_adm FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Erro ao buscar usuário');
+    }
 
-    if ((result.length === 1) && (result[0].password === password)) {
+    if (result.length === 1 && result[0].password === password) {
       const userId = result[0].id;
+      const isAdm = result[0].is_adm;
       console.log("Entrada do Usuário permitida.")
-      return res.status(200).send(userId.toString());
+      return res.status(200).json({ userId,isAdm });
     } else {
       return res.status(500).send("Não encontrado ou não liberado");
     }
@@ -83,7 +88,7 @@ app.post("/html/conferir-token", (req, res) => {
     
     if(result.length === 1){     
       console.log("Token correto.");
-      return res.status(200).send(userId.toString());
+      return res.status(200).send();
     }else{
       return res.status(500).send("Não encontrado ou não liberado");
     }
@@ -367,7 +372,8 @@ app.post("/html/feed-professor-comments", (req, res) => {
         comments.likes AS comment_likes,
         comments.user_id AS user_id,
         users.username AS user_username,
-        users.image AS user_image
+        users.image AS user_image,
+        users.id AS user_id
   
     FROM
       comments
@@ -477,5 +483,37 @@ app.post('/html/feed-professor-delete-comment', (req, res) => {
     res.status(200).send('Comment deletado com sucesso');
   });
 });
+
+app.post('/html/feed-professor-report-comment', (req, res) => {
+    const { userId, commentId } = req.body;
+    
+    // Verificar se já existe um report para o commentId
+    const checkExistingReportQuery = `SELECT * FROM reports WHERE comment_id = ? LIMIT 1`;
+    connection.query(checkExistingReportQuery, [commentId], function(err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erro ao verificar o report existente');
+        return;
+      }
+      
+      // Se já existir um report, retornar uma mensagem informando
+      if (result && result.length > 0) {
+        res.status(400).send('Já existe um report para esse comment');
+        return;
+      }
+      
+      // Caso contrário, criar o novo report
+      const createReportQuery = `INSERT INTO reports (user_id, comment_id) VALUES (?, ?)`;
+      connection.query(createReportQuery, [userId, commentId], function(err, result) {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Erro ao criar o novo report');
+          return;
+        }
+        res.status(200).send('Report criado com sucesso');
+      });
+    });
+  });
+  
 
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

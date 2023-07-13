@@ -1,7 +1,8 @@
-function goToPerfil(userId) {
+function goToPerfil(userId, is_adm) {
   var enviar = document.getElementById("enter");
   
   sessionStorage.setItem('userId', userId);
+  sessionStorage.setItem('is_adm', is_adm);
 
   enviar.addEventListener("click", function() {
     window.location.href = "perfil.html";
@@ -38,33 +39,32 @@ function checarDados() {
       password: password,
     };
 
-    fetch('http://localhost:5600/html/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    }).then(response => {
+  fetch('http://localhost:5600/html/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data),
+})
+  .then(response => {
+    if (response.status === 200) {
+      console.log('Usuário tem permissão de acesso.');
 
-      if (response.status === 200) {
-        console.log('Usuário tem permissão de acesso.');
+      response.json().then(userData => {
+        goToPerfil(userData.userId, userData.isAdm);
+      });
+    } else {
+      console.log('Credenciais erradas.');
 
-        response.text().then(userId => {
-          goToPerfil(userId);
+      fetch('popup.html')
+        .then(response => response.text())
+        .then(popupHTML => {
+          let popupContainer = document.getElementById('popup');
+          popupContainer.innerHTML = popupHTML;
+          popupContainer.textContent = "E-mail e/ou senha incorreto(a).";
         });
-
-      } else {
-        console.log('Credenciais erradas.');
-
-        fetch('popup.html')
-          .then(response => response.text())
-          .then(popupHTML => {
-            let popupContainer = document.getElementById('popup');
-            popupContainer.innerHTML = popupHTML;
-            popupContainer.textContent = "E-mail e/ou senha incorreto(a).";
-          });
-      }
-    });
+    }
+  });
   }
 }
 

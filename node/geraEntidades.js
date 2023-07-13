@@ -85,12 +85,12 @@ users.forEach((user) => {
 });
 
 const departments = [
+  { id: 429, name: 'FACULDADE DE TECNOLOGIA' },
+  { id: 443, name: 'DEPTO ENGENHARIA ELÉTRICA' },
   { id: 508, name: 'DEPTO CIÊNCIAS DA COMPUTAÇÃO' },
   { id: 518, name: 'DEPARTAMENTO DE MATEMÁTICA' },
-  { id: 443, name: 'DEPTO ENGENHARIA ELÉTRICA' },
-  { id: 429, name: 'FACULDADE DE TECNOLOGIA' },
   { id: 524, name: 'INSTITUTO DE FÍSICA' },
-  { id: 504, name: 'INSTITUTO DE CIÊNCIAS EXATAS' },
+  { id: 673, name: 'FACULDADE DO GAMA' }
 ];
 
 const checkExistingDepartmentQuery = 'SELECT id FROM departments WHERE id = ?';
@@ -123,8 +123,8 @@ const disciplines = [
     { code: 'ENE0039', name: 'SISTEMAS DIGITAIS', department_id: 443 },
     { code: 'CIC0097', name: 'BANCOS DE DADOS', department_id: 508 },
     { code: 'MAT0053', name: 'CALCULO NUMERICO', department_id: 518 },
-    { code: 'MAT0076', name: 'CALCULO DE PROBABILIDADE 2', department_id: 518 },
-    { code: 'IFD0304', name: 'FISICA PARA DESENHO INDUSTRIAL', department_id: 524 },
+    { code: 'IFD0304', name: 'FISICA PARA DESENHO INDUSTRIAL', department_id: 524},
+    { code: 'FGA0166', name: 'ELEMENTOS E MÉTODOS EM ELETRÔNICA', department_id: 673}
   ];
   
   const checkExistingDisciplineQuery = 'SELECT code FROM disciplines WHERE code = ?';
@@ -153,12 +153,12 @@ const disciplines = [
   });
 
 const professors = [
-    { name: 'JONATHAS FELIPE AIRES FERREIRA', department_id: 429 },
-    { name: 'ALCIDES LEANDRO DA SILVA', department_id: 443 },
+    { name: 'JOSE ALFREDO RUIZ VARGAS', department_id: 429 },
+    { name: 'EDSON MINTSU HUNG', department_id: 443 },
     { name: 'PEDRO GARCIA FREITAS', department_id: 508 },
-    { name: 'EDUARDO ANTONIO DA SILVA', department_id: 518 },
-    { name: 'MANUELA CAETANO MARTINS DE REZENDE', department_id: 518 },
-    { name: 'MARIANA PENNA LIMA VITENTI', department_id: 524 },
+    { name: 'FLAVIA FERREIRA RAMOS ZAPATA', department_id: 518 },
+    { name: 'NILO MAKIUCHI', department_id: 524},
+    { name: 'FABIANO ARAUJO SOARES', department_id: 673},
   ];
   
   const checkExistingProfessorQuery = 'SELECT id FROM professors WHERE department_id = ?';
@@ -187,19 +187,19 @@ const professors = [
   });
 
   const turmas = [
-    { professor_id: 1, discipline_id: 1 },
-    { professor_id: 2, discipline_id: 2 },
-    { professor_id: 3, discipline_id: 3 },
-    { professor_id: 4, discipline_id: 4 },
-    { professor_id: 5, discipline_id: 5 },
-    { professor_id: 6, discipline_id: 6 },
+    { professor_id: 1, discipline_id: 1,  horario:'6M12 ', local:'FT/ENE BT',   numero:1},
+    { professor_id: 2, discipline_id: 2,  horario:'24M34', local:'FT BT-13/15', numero:2},
+    { professor_id: 3, discipline_id: 3,  horario:'35T45', local:'PAT AT 021', numero:1},
+    { professor_id: 4, discipline_id: 4,  horario:'35T45', local:'ICC ANF. 6', numero:3},
+    { professor_id: 5, discipline_id: 5,  horario:'35T23', local:'PAT AT 012', numero:2},
+    { professor_id: 6, discipline_id: 6,  horario:'35T23', local:'FGA - SALA I2', numero:1},
   ];
   
-  const checkExistingTurmaQuery = 'SELECT id FROM turmas WHERE professor_id = ? AND discipline_id = ?';
-  const insertTurmaQuery = 'INSERT INTO turmas (professor_id, discipline_id) VALUES (?, ?)';
+  const checkExistingTurmaQuery = 'SELECT id FROM turmas WHERE professor_id = ? AND discipline_id = ? AND horario = ? AND local = ? AND numero = ?';
+  const insertTurmaQuery = 'INSERT INTO turmas (professor_id, discipline_id, horario, local, numero) VALUES (?, ?, ?, ?, ?)';
   
   turmas.forEach((turma, index) => {
-    db.query(checkExistingTurmaQuery, [turma.professor_id, turma.discipline_id], (error, results) => {
+    db.query(checkExistingTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência da turma ${index + 1}: ${error.stack}`);
         return;
@@ -210,7 +210,7 @@ const professors = [
         return;
       }
   
-      db.query(insertTurmaQuery, [turma.professor_id, turma.discipline_id], (error, results) => {
+      db.query(insertTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir turma ${index + 1}: ${error.stack}`);
           return;
@@ -218,8 +218,7 @@ const professors = [
         console.log(`Turma ${index + 1} inserida com sucesso.`);
       });
     });
-});
-
+  });
 const usersPosts = [
     // User 1
     { user_id: 1, content: "O prédio de administração da faculdade é realmente impressionante!" },

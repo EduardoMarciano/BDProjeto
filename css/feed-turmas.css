@@ -290,3 +290,17 @@
     margin-bottom: 10%;
 
 }
+
+
+.post-report {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    background-color: var(--roxo-claro);
+}
+
+.post-report:hover {
+    background-color: red;
+    border-radius: 4px;
+    transition: 100ms;
+}
