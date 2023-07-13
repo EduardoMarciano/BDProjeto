@@ -1,5 +1,5 @@
 # BDProjeto | Blog para Avaliação de Professores e Disciplinas.
-Feito por Eduardo Marciano de Melo Meneses 4 semestre, semestre 2023/1.
+#### Feito por Eduardo Marciano de Melo Meneses, 4 semestre, semestre 2023/1.
 
 ## Configurações de ambiente, sistema operacional Linux (Debian):
 
@@ -39,3 +39,10 @@ Feito por Eduardo Marciano de Melo Meneses 4 semestre, semestre 2023/1.
 ### Conceder privilégios ao usuário root para acessar a base de dados:
 	GRANT ALL PRIVILEGES ON BDprojeto.* TO 'root'@'localhost';
 	FLUSH PRIVILEGES;
+ ## Gerar tabelas e povoá-las:
+ ### Por fim, para gerar as tabelas da database e fazer o povoamento automático do banco de dados, execute os seguintes comando:
+	node db.js
+ 	node geraEntidades.js
+  	node server.js
+## Executar código:
+#### Para rodar o sistema, agora, basta apenas usar o Live Server, https://open-vsx.org/extension/ritwickdey/LiveServer, na página de login. Lembre-se de deixar o server.js rodando enquanto a utilização do sistema.
