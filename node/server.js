@@ -514,6 +514,101 @@ app.post('/html/feed-professor-report-comment', (req, res) => {
       });
     });
   });
+
+
+app.post("/html/feed-report-comments", (req, res) => {
+    var query = `SELECT
+      comments.id AS comment_id,
+      comments.content AS comment_content,
+      comments.created_time AS comment_created_time,
+      comments.likes AS comment_likes,
+      comments.user_id AS user_id,
+      users.username AS user_username,
+      users.image AS user_image,
+      users.id AS user_id
+    FROM
+      comments
+      JOIN users ON comments.user_id = users.id
+      JOIN UserReportsAndComments ON comments.id = UserReportsAndComments.comment_id
+    WHERE
+      UserReportsAndComments.report_id IS NOT NULL
+    ORDER BY
+      comments.created_time DESC`;
+  
+    connection.query(query, [], function(err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erro ao carregar os comentários');
+        return;
+      }
+      const comments = JSON.parse(JSON.stringify(result));
+  
+
+      comments.forEach(comment => {
+        const commentDate = new Date(comment.comment_created_time);
+        const currentDate = new Date();
+        const timeDiff = Math.abs(currentDate - commentDate);
+        const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  
+        if (daysDiff === 0) {
+
+          const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+          if (hoursDiff > 1) {
+            comment.comment_created_time = `${hoursDiff} horas atrás`;
+          } else {
+            const minutesDiff = Math.floor(timeDiff / (1000 * 60));
+            comment.comment_created_time = `${minutesDiff} minutos atrás`;
+          }
+        } else if (daysDiff === 1) {
+
+          comment.comment_created_time = '1 dia atrás';
+        } else {
+
+          comment.comment_created_time = `${daysDiff} dias atrás`;
+        }
+      });
+  
+      // Ordenar os comentários pelo mais novo primeiro
+      comments.sort((a, b) => new Date(b.comment_created_time) - new Date(a.comment_created_time));
+  
+      res.status(200).json(comments);
+    });
+  });
+
+
+
+app.post('/html/feed-report-deny-report', (req, res) => {
+  const { commentId } = req.body;
+
+  // Excluir a denúncia da tabela "reports"
+  const deleteReportQuery = `DELETE FROM reports WHERE comment_id = ?`;
+  connection.query(deleteReportQuery, [commentId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao recusar a denúncia');
+      return;
+    }
+
+    res.status(200).send('Denúncia recusada com sucesso');
+  });
+});
+
+app.post('/html/feed-report-accept-report', (req, res) => {
+  const { commentId } = req.body;
+
+  // Excluir o comentário da tabela "comments"
+  const deleteCommentQuery = `DELETE FROM comments WHERE id = ?`;
+  connection.query(deleteCommentQuery, [commentId], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erro ao aceitar a denúncia e remover o comentário');
+      return;
+    }
+
+    res.status(200).send('Denúncia aceita e comentário removido com sucesso');
+  });
+});
+
   
 
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

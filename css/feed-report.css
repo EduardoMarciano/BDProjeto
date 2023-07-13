@@ -1,0 +1,321 @@
+#content-container {
+    margin-top: clamp(47px, 8.4vh, 86px); /* Sair de baixo da barra de cabeçalho */
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+#content-container-inner {
+    height: fit-content;
+    width: 55vw;
+    min-width: 646px;
+    border-width: 5px;
+    border-color: var(--preto);
+}
+
+#content-container div div {
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--preto);
+}
+
+#content-container div div * {
+    border-style: none;
+}
+
+#profile-container {
+    padding-bottom: 1rem;
+    background-color: var(--roxo-claro);
+    
+}
+
+#profile-container * {
+    margin-left: 5rem;
+}
+
+#profile-container p {
+    color: var(--branco);
+    line-height: 30%;
+}
+
+#profile-container .user-profile-picture {
+    margin-top: 3rem;
+}
+
+#profile-container #user-name {
+    margin-top: 1.5rem;
+    font-size: larger;
+    font-weight: 700;
+}
+
+#feed-container h1 {
+    padding-left: 1rem;
+    color: var(--branco);
+}
+
+#feed-container h1 {
+    font-size: large;
+}
+
+#posts-container{
+    min-height: 840px;
+}
+
+.post {
+    background-color: #670010;
+    border-radius: 32px;
+    margin-bottom: 1rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+    padding-top: 0.5rem;
+    padding-left:1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+}
+.post-professor {
+    background-color: #670010;
+    border-radius: 32px;
+    margin-bottom: 1rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+    padding-top: 0.5rem;
+    padding-left:1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    color: var(--preto);
+}
+
+.post-text-content {
+    color: var(--branco);
+    font-weight: 500;
+    margin-left: 3.6rem;
+}
+
+.post-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-image-content {
+    max-width: 80%;
+}
+
+.post-metadata {
+    display: flex;
+}
+
+.post-metadata .post-author-name {
+    margin-left: 0.6rem;
+    font-weight: 700;
+    color: var(--branco);
+}
+
+.post-metadata .post-date {
+    font-weight: 500;
+    color: #71767B;
+    margin-left: 2%;
+}
+.signin-button{
+    background-color: var(--roxo-escuro);
+    color: var(--branco);
+}
+
+#header-bar{
+    display: flex;
+    align-items: center;
+}
+
+#new-post-button {
+    background-color: var(--roxo-escuro);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--branco);
+    min-height: 59px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+#Excluir {
+    background-color: red;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--branco);
+    min-height: 59px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    margin-left: 45%;
+}
+#Editar {
+    background-color: var(--roxo-escuro);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--branco);
+    min-height: 59px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+
+#modal-post-editor {
+    border: none;
+    border-radius: 32px;
+    background-color: var(--roxo-escuro);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
+    width: 80%;
+    max-width: 961px;
+    min-height: 300px;
+    height: 50%;
+    max-height: 705px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#modal-post-editor::backdrop {
+    background-color: black;
+    opacity: 0.6;
+}
+
+#modal-post-editor-buttons {
+    width: 100%;
+}
+
+#modal-post-editor-buttons * {
+    float: right;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    color: var(--branco);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+
+#modal-post-editor-editbox {
+    width: 80%;
+    height: 80%;
+    background-color: var(--secundario);
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    border-radius: 16px;
+}
+
+#modal-post-editor-toolstrip {
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 0.8rem;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: var(--secundario-claro);
+}
+
+#modal-post-editor-cancel {
+    background-color: var(--secundario);
+    margin-right: 0.25rem;
+}
+
+#modal-post-editor-publish {
+    background-color: var(--roxo-claro);
+    margin-left: 0.25rem;
+    margin-right: 3.8rem;
+}
+
+#new-content-post{
+    background-color: var(--roxo-claro);
+    color: var(--branco);
+    resize: none;
+
+}
+.post-trash-can {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    background-color:  #670010;
+}
+
+.post-trash-can:hover {
+    background-color: red;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+.post-reply-button {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    background-color: #670010;
+}
+
+.post-reply-button:hover {
+    background-color: greenyellow;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+
+.post-like-button {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    background-color: var(--roxo-claro);
+}
+
+.post-like-button:hover {
+    background-color: greenyellow;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+.likes-count{
+    position: relative;
+    float: left;
+    background-color: var(--roxo-claro);
+    margin-bottom: 10%;
+
+}
+
+.post-report {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    background-color: #670010;
+}
+
+.post-report:hover {
+    background-color: red;
+    border-radius: 4px;
+    transition: 100ms;
+}
+
+
+.post-accept {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    background-color: #670010;
+}
+
+.post-accept:hover {
+    background-color: red;
+    border-radius: 4px;
+    transition: 100ms;
+}
