@@ -25,7 +25,7 @@ function carregaReports() {
       .then(comments => {
         for (let i = 0; i < comments.length; i++) {
           const comment = comments[i];
-          const url_img_user = comment.user_image || '/svg/user.svg';
+          const url_img_user = comment.user_image;
   
           const postHTML = `
             <div class="post">

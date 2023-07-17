@@ -30,7 +30,7 @@ function carregaPosts() {
 
           console.log(post);
           console.log(i);
-          var url_img_user = '/svg/user.svg';
+          var url_img_user = post.user_image;
   
           const postHTML = `
             <div class="post">

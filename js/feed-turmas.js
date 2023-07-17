@@ -76,7 +76,7 @@ async function carregaComment(professorId) {
       for (let i = 0; i < comments.length; i++) {
         const comment = comments[i];
         console.log(comment);
-        var url_img_user = '/svg/user.svg';
+        var url_img_user = comment.user_image;
 
         const commentHTML = `
           <div class="post">

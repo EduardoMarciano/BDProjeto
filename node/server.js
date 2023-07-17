@@ -245,6 +245,8 @@ app.post("/html/feed-post", (req, res) => {
       
       // Atualize a propriedade 'created_time' com a data tratada
       post.created_time = formattedDuration;
+      const buffer = Buffer.from(post.user_image, 'hex');
+      post.user_image = buffer.toString('utf-8');
     });
 
     res.status(200).json(posts);
@@ -420,6 +422,8 @@ app.post("/html/feed-professor-comments", (req, res) => {
         // Comentário criado há mais de um dia
         comment.comment_created_time = `${daysDiff} dias atrás`;
       }
+      const buffer = Buffer.from(comment.user_image, 'hex');
+      comment.user_image = buffer.toString('utf-8');
     });
 
     // Ordenar os comentários pelo mais novo primeiro
@@ -572,6 +576,8 @@ app.post("/html/feed-report-comments", (req, res) => {
 
           comment.comment_created_time = `${daysDiff} dias atrás`;
         }
+        const buffer = Buffer.from(comment.user_image, 'hex');
+        comment.user_image = buffer.toString('utf-8');
       });
   
       // Ordenar os comentários pelo mais novo primeiro
