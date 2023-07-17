@@ -25,15 +25,19 @@
     <div id="content-container">
         <div id="content-container-inner">
             <div id="profile-container">
-                <img src="/svg/user.svg" class="user-profile-picture" width=150 height="150">
+                <img src="/svg/user.svg" class="user-profile-picture" id = "user-profile-picture" width=150 height="150">
                 <p id = "name-area">Nome Sobrenome</p>
                 <p id = "cargo-area">🏢 Cargo</p>
                 <p id = "email-area">✉️ nome.sobrenome@dominio.com</p>
 
                 <button id="new-post-button" onclick="setupModalPostEditor()">Nova Publicação</button>
                 <button id="Editar" onclick="goToEditar()">Editar Dados da Conta</button>
-                <button id="Excluir" onclick="deleteUser()">Excluir Conta</button>
                 
+                <button id="select-profile-image">User Image</button>
+                <input type="file" id="image-input" style = "display: none;">
+
+                <button id="Excluir" onclick="deleteUser()">Excluir Conta</button>
+
             </div>
             <div id="feed-container">
                 <h1>Publicações</h1>

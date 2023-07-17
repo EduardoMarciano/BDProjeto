@@ -25,12 +25,11 @@ function carregaPosts() {
     .then(posts => {
       for (let i = 0; i < posts.length; i++) {
         const post = posts[i];
-        var url_img_user = '/svg/user.svg';
 
         const postHTML = `
           <div class="post">
             <div class="post-metadata">
-              <img src="${url_img_user}" class="user-profile-picture" width="48" height="48">
+              <img src="${post.user_image}" class="user-profile-picture" width="48" height="48">
               <p class="post-author-name">${post.username}</p>
               <p class="post-date">${post.created_time}</p>
             </div>
@@ -107,10 +106,12 @@ function carregarDados() {
         var area_role = document.getElementById('cargo-area');
         var area_email = document.getElementById('email-area');
         var area_username = document.getElementById('name-area');
+        var image_user = document.getElementById('user-profile-picture');
   
         area_role.textContent = role;
         area_email.textContent = email;
         area_username.textContent = username;
+        image_user.src = data.image;
 
         var area_comment = document.getElementsByClassName("post-author-name");
 
@@ -262,7 +263,53 @@ function releaseUpdate(postId) {
     });
 }
 
+function selecionaFiles() {
+  const selectProfileImage = document.getElementById("select-profile-image");
+  const imageInput = document.getElementById("image-input");
+  const userId = parseInt(sessionStorage.getItem('userId'));
+
+  selectProfileImage.onclick = function() {
+    imageInput.click();
+  };
+
+  imageInput.onchange = function(event) {
+    const filePath = event.target.value;
+
+    if (filePath !== "") {
+      const data = {
+        userId: userId,
+        imagePath: filePath
+      };
+
+      enviarArquivo(data);
+    }
+  };
+}
+
+function enviarArquivo(data) {
+  fetch('http://localhost:5600/html/perfil-change-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        console.log("Imagem atualizada com sucesso.");
+        carregarDados();
+        carregaPosts();
+      } else {
+        console.log("Problema interno no servidor.");
+      }
+    })
+    .catch(error => {
+      console.log("Erro ao atualizar imagem:", error);
+    });
+
+  }
 
 //Executa a função quando a página é carregada
 document.addEventListener("DOMContentLoaded", carregaPosts);
 document.addEventListener("DOMContentLoaded", carregarDados);
+document.addEventListener("DOMContentLoaded", selecionaFiles);

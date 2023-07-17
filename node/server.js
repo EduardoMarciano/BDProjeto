@@ -128,14 +128,19 @@ app.post("/html/perfil", (req, res) => {
     if(result.length === 1){
 
         var username  = result[0].username;
-        var role     = result[0].role;
+        var role      = result[0].role;
         var email     = result[0].email;
+        var image     = result[0].image;
+        
+        const buffer = Buffer.from(image, 'hex');
+        image = buffer.toString('utf-8');
 
         const data = {
           username: username,
           role:     role,
           email:    email,
           userId:   userId,
+          image:    image
       };
         
         console.log("Carregando dados do usuário.");      
@@ -188,7 +193,8 @@ app.post("/html/perfil-post", (req, res) => {
 
       // Atualize a propriedade 'created_time' com a data tratada
       post.created_time = formattedDuration;
-
+      const buffer = Buffer.from(post.user_image, 'hex');
+      post.user_image = buffer.toString('utf-8');
       posts.push({
         id: post.id,
         user_image: post.user_image,
@@ -610,5 +616,25 @@ app.post('/html/feed-report-accept-report', (req, res) => {
 });
 
   
+app.post('/html/perfil-change-image', (req, res) => {
+  const userId = req.body.userId;
+
+  var imagePath = req.body.imagePath;
+  const segments = imagePath.split('\\');
+  imagePath = segments[segments.length - 1];
+  imagePath = "/DATA/" + imagePath
+
+    const buffer = Buffer.from(imagePath, 'binary');
+
+  const query = 'UPDATE users SET image = ? WHERE id = ?';
+  connection.query(query, [buffer, userId], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Erro ao salvar o caminho da imagem');
+    }
+    return res.status(200).send('Caminho da imagem atualizado com sucesso');
+  });
+});
+
 
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

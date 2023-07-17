@@ -1,6 +1,5 @@
 const db = require('./db.js');
 
-
 // POVOA O BANCO DE DADOS COM ALUNOS
 const users = [
   {
@@ -11,6 +10,7 @@ const users = [
     gender: 'male',
     is_adm: true,
     course: 'Ciência da Computação',
+    image: '/DATA/0.png'
   },
   {
     username: 'Alice Brown',
@@ -20,6 +20,7 @@ const users = [
     gender: 'female',
     is_adm: false,
     course: 'Engenharia da Computação',
+    image: '/DATA/1.png'
   },
   {
     username: 'Bob Smith',
@@ -29,6 +30,7 @@ const users = [
     gender: 'male',
     is_adm: false,
     course: 'Licenciatura em Computação',
+    image: '/DATA/2.png'
   },
   {
     username: 'Carol Johnson',
@@ -38,6 +40,7 @@ const users = [
     gender: 'female',
     is_adm: false,
     course: 'Ciência da Computação',
+    image: '/DATA/3.png'
   },
   {
     username: 'Dave Williams',
@@ -47,6 +50,7 @@ const users = [
     gender: 'male',
     is_adm: false,
     course: 'Engenharia da Computação',
+    image: '/DATA/4.png'
   },
   {
     username: 'Emily Jones',
@@ -56,7 +60,8 @@ const users = [
     gender: 'female',
     is_adm: false,
     course: 'Licenciatura em Computação',
-  },
+    image: '/DATA/5.png'
+  }
 ];
 
 const checkExistingUserQuery = 'SELECT id FROM users WHERE email = ?';
