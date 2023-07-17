@@ -52,6 +52,6 @@
 ![Diagrama de Entidade-Relacionamento 2](MER/ModeloRelacional.png)
 ## Vídeo Demonstrativo:
 ### https://youtu.be/HDrOMiBEB-w
-## Relatório Técnico:
+## Relatório Técnico (Link apenas para visualização):
 ### https://www.overleaf.com/read/gbfbbbswxqsr
 
