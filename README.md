@@ -1,4 +1,4 @@
-# BDProjeto | Blog para Avaliação de Professores e Disciplinas.
+# Blog para Avaliação de Professores e Disciplinas.
 #### Feito por Eduardo Marciano de Melo Meneses, 4 semestre, semestre 2023/1.
 
 ## Configurações de ambiente, sistema operacional Linux (Debian):
