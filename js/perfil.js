@@ -1,5 +1,5 @@
 function carregaPosts() {
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const postContainer = document.getElementById("posts-container");
 
   postContainer.innerHTML = "";
@@ -23,8 +23,8 @@ function carregaPosts() {
       }
     })
     .then(posts => {
-      for (let i = 0; i < posts.length; i++) {
-        const post = posts[i];
+      for (const element of posts) {
+        const post = element;
 
         const postHTML = `
           <div class="post">
@@ -80,7 +80,7 @@ function publishModal() {
 
 
 function carregarDados() {
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
   
     const data = {
       userId: userId,
@@ -99,24 +99,24 @@ function carregarDados() {
         }
       }).then(data => {
         userId = data.userId;
-        var role = '🏢 '+data.role;
-        var email = '✉️ '+data.email;
-        var username = data.username;
+        let role = '🏢 '+data.role;
+        let email = '✉️ '+data.email;
+        let username = data.username;
   
-        var area_role = document.getElementById('cargo-area');
-        var area_email = document.getElementById('email-area');
-        var area_username = document.getElementById('name-area');
-        var image_user = document.getElementById('user-profile-picture');
+        let area_role = document.getElementById('cargo-area');
+        let area_email = document.getElementById('email-area');
+        let area_username = document.getElementById('name-area');
+        let image_user = document.getElementById('user-profile-picture');
   
         area_role.textContent = role;
         area_email.textContent = email;
         area_username.textContent = username;
         image_user.src = data.image;
 
-        var area_comment = document.getElementsByClassName("post-author-name");
+        let area_comment = document.getElementsByClassName("post-author-name");
 
-        for (var i = 0; i < area_comment.length; i++) {
-          area_comment[i].textContent = username;
+        for (const element of area_comment) {
+          element.textContent = username;
         }
         
   
@@ -152,9 +152,9 @@ function carregarDados() {
   }
 
 function releasePost(){
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
 
-  var content = document.getElementById("new-content-post").value;
+  let content = document.getElementById("new-content-post").value;
   console.log(content);
   const data = {
     userId: userId,
@@ -182,7 +182,7 @@ function releasePost(){
 
 
 function deletePost(postId) {
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const data = {
     userId: userId,
     postId: postId,
@@ -208,7 +208,7 @@ function deletePost(postId) {
 }
 
 function deleteUser() {
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const data = {
     userId: userId,
   };
@@ -240,7 +240,7 @@ function goToEditar() {
 }
 
 function releaseUpdate(postId) {
-  var content = document.getElementById("new-content-post-2").value;
+  let content = document.getElementById("new-content-post-2").value;
   const data = {
     postId: postId,
     content: content

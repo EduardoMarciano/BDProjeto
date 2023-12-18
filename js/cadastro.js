@@ -1,5 +1,5 @@
 function goToLogin() {
-  var enviar = document.getElementById("signup-confirm-button");
+  let enviar = document.getElementById("signup-confirm-button");
 
   enviar.addEventListener("click", function() {
     window.location.href = "login.html";
@@ -7,8 +7,8 @@ function goToLogin() {
 }
 
 function EmailIsCorrect(email) {
-  var design = /\S+@\S+\.\S+/;
-  var permitir = design.test(email);
+  let design = /\S+@\S+\.\S+/;
+  let permitir = design.test(email);
 
   if (permitir) {
     return true;
@@ -69,7 +69,7 @@ function enviarDados() {
 }
 
 function showPassword(elementId, button) {
-  var form = document.getElementById(elementId);
+  let form = document.getElementById(elementId);
 
   if (form.type === "password") {
     form.type = "text";

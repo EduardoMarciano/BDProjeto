@@ -11,13 +11,13 @@
     width: 55vw;
     min-width: 646px;
     border-width: 5px;
-    border-color: var(--preto);
+    border-color: let(--preto);
 }
 
 #content-container div div {
     border-width: 5px;
     border-style: solid;
-    border-color: var(--preto);
+    border-color: let(--preto);
 }
 
 #content-container div div * {
@@ -26,7 +26,7 @@
 
 #profile-container {
     padding-bottom: 1rem;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     
 }
 
@@ -35,7 +35,7 @@
 }
 
 #profile-container p {
-    color: var(--branco);
+    color: let(--branco);
     line-height: 30%;
 }
 
@@ -51,10 +51,7 @@
 
 #feed-container h1 {
     padding-left: 1rem;
-    color: var(--branco);
-}
-
-#feed-container h1 {
+    color: let(--branco);
     font-size: large;
 }
 
@@ -83,11 +80,11 @@
     padding-left:1rem;
     padding-right: 1rem;
     padding-bottom: 2rem;
-    color: var(--preto);
+    color: let(--preto);
 }
 
 .post-text-content {
-    color: var(--branco);
+    color: let(--branco);
     font-weight: 500;
     margin-left: 3.6rem;
 }
@@ -110,7 +107,7 @@
 .post-metadata .post-author-name {
     margin-left: 0.6rem;
     font-weight: 700;
-    color: var(--branco);
+    color: let(--branco);
 }
 
 .post-metadata .post-date {
@@ -119,8 +116,8 @@
     margin-left: 2%;
 }
 .signin-button{
-    background-color: var(--roxo-escuro);
-    color: var(--branco);
+    background-color: let(--roxo-escuro);
+    color: let(--branco);
 }
 
 #header-bar{
@@ -129,10 +126,10 @@
 }
 
 #new-post-button {
-    background-color: var(--roxo-escuro);
+    background-color: let(--roxo-escuro);
     font-weight: 700;
     font-size: 16px;
-    color: var(--branco);
+    color: let(--branco);
     min-height: 59px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
@@ -146,22 +143,21 @@
     background-color: red;
     font-weight: 700;
     font-size: 16px;
-    color: var(--branco);
+    color: let(--branco);
     min-height: 59px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
     margin-bottom: 1rem;
-    margin-left: 0.4rem;
     padding-left: 1rem;
     padding-right: 1rem;
     cursor: pointer;
     margin-left: 45%;
 }
 #Editar {
-    background-color: var(--roxo-escuro);
+    background-color: let(--roxo-escuro);
     font-weight: 700;
     font-size: 16px;
-    color: var(--branco);
+    color: let(--branco);
     min-height: 59px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
@@ -175,14 +171,13 @@
 #modal-post-editor {
     border: none;
     border-radius: 32px;
-    background-color: var(--roxo-escuro);
+    background-color: let(--roxo-escuro);
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
     width: 80%;
     max-width: 961px;
     min-height: 300px;
     height: 50%;
     max-height: 705px;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -205,7 +200,7 @@
     font-size: 16px;
     border-radius: 16px;
     transition: background-color 0.3s ease;
-    color: var(--branco);
+    color: let(--branco);
     padding: 1rem 1.5rem;
     cursor: pointer;
 }
@@ -213,7 +208,7 @@
 #modal-post-editor-editbox {
     width: 80%;
     height: 80%;
-    background-color: var(--secundario);
+    background-color: let(--secundario);
     margin-bottom: 1rem;
     margin-top: 3rem;
     border-radius: 16px;
@@ -225,23 +220,23 @@
     gap: 0.8rem;
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: var(--secundario-claro);
+    border-color: let(--secundario-claro);
 }
 
 #modal-post-editor-cancel {
-    background-color: var(--secundario);
+    background-color: let(--secundario);
     margin-right: 0.25rem;
 }
 
 #modal-post-editor-publish {
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     margin-left: 0.25rem;
     margin-right: 3.8rem;
 }
 
 #new-content-post{
-    background-color: var(--roxo-claro);
-    color: var(--branco);
+    background-color: let(--roxo-claro);
+    color: let(--branco);
     resize: none;
 
 }
@@ -276,7 +271,7 @@
     position: relative;
     float: left;
     cursor: pointer;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
 }
 
 .post-like-button:hover {
@@ -288,7 +283,7 @@
 .likes-count{
     position: relative;
     float: left;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     margin-bottom: 10%;
 
 }

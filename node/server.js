@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 
 app.post("/html/cadastro", (req, res) => {
   const {username, password, email, role, gender, is_adm, course} = req.body;
-  var query = 'SELECT * FROM users WHERE email = ?';
+  let query = 'SELECT * FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
     if (result.length <= 0) {
@@ -35,7 +35,7 @@ app.post("/html/cadastro", (req, res) => {
 
 app.post("/html/login", (req, res) => {
   const { email, password } = req.body;
-  var query = 'SELECT users.username, users.password, users.id, users.is_adm FROM users WHERE email = ?';
+  let query = 'SELECT users.username, users.password, users.id, users.is_adm FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
     if (err) {
@@ -56,13 +56,13 @@ app.post("/html/login", (req, res) => {
 
 app.post("/html/conferir-email", (req, res) => {
   const {email} = req.body;
-  var query = 'SELECT users.id FROM users WHERE email = ?';
+  let query = 'SELECT users.id FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
 
     if ((result.length === 1)) {
-      var userId = result[0].id;
-      var token = gerarToken();
+      let userId = result[0].id;
+      let token = gerarToken();
 
       query = 'UPDATE users SET token = ? WHERE id = ?';
 
@@ -82,7 +82,7 @@ app.post("/html/conferir-email", (req, res) => {
 
 app.post("/html/conferir-token", (req, res) => {
   const {token} = req.body;
-  query = 'SELECT * from users WHERE token = ?';
+  let query = 'SELECT * from users WHERE token = ?';
 
   connection.query(query, [token], function(err, result) {
     
@@ -99,7 +99,7 @@ app.post("/html/conferir-token", (req, res) => {
 app.post("/html/recuperar-senha", (req, res) => {
   const {password, userId} = req.body;
   
-  var query = 'SELECT * from users WHERE id = ?';
+  let query = 'SELECT * from users WHERE id = ?';
   connection.query(query, [userId], function(err, result) {
     
     if(result.length === 1){
@@ -122,15 +122,15 @@ app.post("/html/recuperar-senha", (req, res) => {
 app.post("/html/perfil", (req, res) => {
   const {userId} = req.body;
   
-  var query = 'SELECT * from users WHERE id = ?';
+  let query = 'SELECT * from users WHERE id = ?';
   connection.query(query, [userId], function(err, result) {
     
     if(result.length === 1){
 
-        var username  = result[0].username;
-        var role      = result[0].role;
-        var email     = result[0].email;
-        var image     = result[0].image;
+        let username  = result[0].username;
+        let role      = result[0].role;
+        let email     = result[0].email;
+        let image     = result[0].image;
         
         const buffer = Buffer.from(image, 'hex');
         image = buffer.toString('utf-8');
@@ -157,7 +157,7 @@ app.post("/html/perfil", (req, res) => {
 app.post("/html/perfil-post", (req, res) => {
   const { userId } = req.body;
 
-  var query = `SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image FROM posts 
+  let query = `SELECT posts.*, users.username, users.created_time AS user_created_time, users.image AS user_image FROM posts 
                INNER JOIN users ON posts.user_id = users.id WHERE user_id = ?
                ORDER BY posts.created_time DESC`;
 
@@ -170,8 +170,8 @@ app.post("/html/perfil-post", (req, res) => {
 
     const posts = [];
 
-    for (let i = 0; i < result.length; i++) {
-      const post = result[i];
+    for (const element of result) {
+      const post = element;
 
       const postDate = new Date(post.created_time);
 
@@ -210,9 +210,8 @@ app.post("/html/perfil-post", (req, res) => {
 
 
 app.post("/html/feed-post", (req, res) => {
-  const { userId } = req.body;
 
-  var query = `CALL GetAllPosts()`;
+  let query = `CALL GetAllPosts()`;
 
   connection.query(query, function(err, result) {
     if (err) {
@@ -258,7 +257,7 @@ app.post('/html/perfil-new-post', (req, res) => {
   
   console.log(userId, content);
 
-  var query = `INSERT INTO posts (user_id, content, created_time) VALUES (?, ?, NOW())`;
+  let query = `INSERT INTO posts (user_id, content, created_time) VALUES (?, ?, NOW())`;
 
   connection.query(query, [userId, content], function(err, result) {
     if (err) {
@@ -273,8 +272,8 @@ app.post('/html/perfil-new-post', (req, res) => {
 
 
 app.post('/html/perfil-delete-post', (req, res) => {
-  const { userId, postId } = req.body;
-  var query = `DELETE FROM posts WHERE id = ? `;
+  const {postId} = req.body;
+  let query = `DELETE FROM posts WHERE id = ? `;
 
   connection.query(query, [postId], function(err, result) {
     if (err) {
@@ -289,7 +288,7 @@ app.post('/html/perfil-delete-post', (req, res) => {
 
 app.post('/html/perfil-delete-user', (req, res) => {
   const {userId} = req.body;
-  var query = `DELETE FROM users WHERE id = ? `;
+  let query = `DELETE FROM users WHERE id = ? `;
 
   connection.query(query, [userId], function(err, result) {
     if (err) {
@@ -304,7 +303,7 @@ app.post('/html/perfil-delete-user', (req, res) => {
 
 app.post("/html/editar-dados", (req, res) => {
   const { username, email, role, gender, is_adm, course, userId } = req.body;
-  var query = 'SELECT * FROM users WHERE email = ?';
+  let query = 'SELECT * FROM users WHERE email = ?';
 
   connection.query(query, [email], function(err, result) {
     if (result.length <= 0) {
@@ -320,9 +319,7 @@ app.post("/html/editar-dados", (req, res) => {
 });
 
 app.post("/html/feed-professor", (req, res) => {
-  const { userId } = req.body;
-
-  var query = `SELECT DISTINCT
+  let query = `SELECT DISTINCT
                 professors.id AS professor_id,
                 professors.name AS professor_name,
                 departments.name AS department_name,
@@ -373,7 +370,7 @@ app.post('/html/feed-professor-new-comment', (req, res) => {
 app.post("/html/feed-professor-comments", (req, res) => {
   const { professorId } = req.body;
 
-  var query = `SELECT
+  let query = `SELECT
         comments.id AS comment_id,
         comments.content AS comment_content,
         comments.created_time AS comment_created_time,
@@ -434,7 +431,7 @@ app.post("/html/feed-professor-comments", (req, res) => {
 });
 
 app.post('/html/feed-professor-like', (req, res) => {
-  const { userId, commentId } = req.body;
+  const {commentId } = req.body;
 
   // Atualizar o número de curtidas no banco de dados
   const updateQuery = `UPDATE comments SET likes = likes + 1 WHERE id = ?`;
@@ -481,8 +478,8 @@ app.post('/html/perfil-update-post', (req, res) => {
 
 
 app.post('/html/feed-professor-delete-comment', (req, res) => {
-  const { userId, commentId } = req.body;
-  var query = `DELETE FROM comments WHERE id = ? `;
+  const {commentId} = req.body;
+  let query = `DELETE FROM comments WHERE id = ? `;
 
   connection.query(query, [commentId ], function(err, result) {
     if (err) {
@@ -527,7 +524,7 @@ app.post('/html/feed-professor-report-comment', (req, res) => {
 
 
 app.post("/html/feed-report-comments", (req, res) => {
-    var query = `SELECT
+    let query = `SELECT
       comments.id AS comment_id,
       comments.content AS comment_content,
       comments.created_time AS comment_created_time,
@@ -625,7 +622,7 @@ app.post('/html/feed-report-accept-report', (req, res) => {
 app.post('/html/perfil-change-image', (req, res) => {
   const userId = req.body.userId;
 
-  var imagePath = req.body.imagePath;
+  let imagePath = req.body.imagePath;
   const segments = imagePath.split('\\');
   imagePath = segments[segments.length - 1];
   imagePath = "/DATA/" + imagePath
@@ -636,7 +633,7 @@ app.post('/html/perfil-change-image', (req, res) => {
   connection.query(query, [buffer, userId], (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Erro ao salvar o caminho da imagem');
+      return res.status(500).send('Erro ao sallet o caminho da imagem');
     }
     return res.status(200).send('Caminho da imagem atualizado com sucesso');
   });

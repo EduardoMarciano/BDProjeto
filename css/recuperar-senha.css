@@ -35,7 +35,7 @@
 }
 
 #password-recovery-box {
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     border-radius: 10px;
     min-width: 450px;
     min-height: 70%;
@@ -69,24 +69,21 @@
 }
 
 #login-page-link {
-    color: var(--branco);
+    color: let(--branco);
     text-decoration: none;
     margin-bottom: 2%;
 }
 
 #login-page-link:hover {
-    color: var(--roxo-escuro);
+    color: let(--roxo-escuro);
     transition: 300ms;
 }
 
 #gender {
     font-size: inherit;
     font-family: inherit;
-    background-color: var(--branco);
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    color: var(--roxo-escuro);
+    background-color: let(--branco);
+    color: let(--roxo-escuro);
     font-weight: 700;
     height: 59px;
     border: none;
@@ -104,11 +101,11 @@
     justify-content: center;
     display: inline-block;
     text-align: center;
-    background-color: var(--branco);
+    background-color: let(--branco);
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
-    color: var(--roxo-claro);
+    color: let(--roxo-claro);
     min-height: 59px;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -116,13 +113,13 @@
 }
 
 #password-recovery-confirm-button:hover {
-    background-color: var(--roxo-escuro);
+    background-color: let(--roxo-escuro);
 }
 
 .form-label {
     align-self: self-start;
     padding-left: 7rem;
-    color: var(--branco);
+    color: let(--branco);
     font-weight: 700;
 
 }
@@ -131,12 +128,12 @@
     align-self: self-start;
     margin-top: 3rem;
     margin-left: 5rem;
-    color: var(--branco);
+    color: let(--branco);
     font-weight: 700;
 
 }
 
 #popup{
     color: red;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
 }

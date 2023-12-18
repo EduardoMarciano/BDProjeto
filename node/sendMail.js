@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 function gerarToken(){
-  var numeroAleatorio = 0;
+  let numeroAleatorio = 0;
 
   while (numeroAleatorio < 100000){
     numeroAleatorio =Math.floor(Math.random() * 1000000)

@@ -1,5 +1,5 @@
 function goToPerfil() {
-    var enviar = document.getElementById("signup-confirm-button");
+    let enviar = document.getElementById("signup-confirm-button");
   
     enviar.addEventListener("click", function() {
       window.location.href = "perfil.html";
@@ -7,8 +7,8 @@ function goToPerfil() {
   }
   
   function EmailIsCorrect(email) {
-    var design = /\S+@\S+\.\S+/;
-    var permitir = design.test(email);
+    let design = /\S+@\S+\.\S+/;
+    let permitir = design.test(email);
   
     if (permitir) {
       return true;
@@ -25,7 +25,7 @@ function goToPerfil() {
   }
   
   function editarDados() {
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
     const username = document.getElementById('signup-user').value;
     const gender = document.getElementById('gender').value;
     const role = document.getElementById('signup-role').value;

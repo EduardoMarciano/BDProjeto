@@ -1,5 +1,5 @@
 function goToRecuperarSenha() {
-    var enviar = document.getElementById("enter");
+    let enviar = document.getElementById("enter");
   
     enviar.addEventListener("click", function() {
       window.location.href = "recuperar-senha.html";

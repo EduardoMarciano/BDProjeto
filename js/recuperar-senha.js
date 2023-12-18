@@ -1,5 +1,5 @@
 function goToLogin(userId) {
-  var enviar = document.getElementById("password-recovery-confirm-button");
+  let enviar = document.getElementById("password-recovery-confirm-button");
   
   sessionStorage.setItem('userId', userId);
 
@@ -13,12 +13,8 @@ function passwordIsCorrect() {
   const password0 = document.getElementById('password-recovery-password-form').value;
   const password1 = document.getElementById('password-recovery-password-confirmation-form').value;
   
-  var permitir = (password0 === password1);
-  if (permitir) {
-    return true;
-  } else {
-    return false;
-  }
+  let permitir = (password0 === password1);
+  return permitir;
 }
 
 function checarDados() {
@@ -65,7 +61,7 @@ function checarDados() {
   }
 }
 function showPassword(elementId, button) {
-    var form = document.getElementById(elementId);
+    let form = document.getElementById(elementId);
   
     if (form.type === "password") {
       form.type = "text";

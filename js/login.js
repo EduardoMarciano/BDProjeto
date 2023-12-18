@@ -1,5 +1,5 @@
 function goToPerfil(userId, is_adm) {
-  var enviar = document.getElementById("enter");
+  let enviar = document.getElementById("enter");
   
   sessionStorage.setItem('userId', userId);
   sessionStorage.setItem('is_adm', is_adm);
@@ -11,8 +11,8 @@ function goToPerfil(userId, is_adm) {
 }
 
 function EmailIsCorrect(email) {
-  var design = /\S+@\S+\.\S+/;
-  var permitir = design.test(email);
+  let design = /\S+@\S+\.\S+/;
+  let permitir = design.test(email);
 
   if (permitir) {
     return true;
@@ -69,7 +69,7 @@ function checarDados() {
 }
 
 function showPassword(elementId, button) {
-  var form = document.getElementById(elementId);
+  let form = document.getElementById(elementId);
 
   if (form.type === "password") {
     form.type = "text";

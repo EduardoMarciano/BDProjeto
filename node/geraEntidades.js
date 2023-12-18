@@ -158,7 +158,7 @@ const disciplines = [
   });
 
 const professors = [
-    { name: 'JOSE ALFREDO RUIZ VARGAS', department_id: 429 },
+    { name: 'JOSE ALFREDO RUIZ letGAS', department_id: 429 },
     { name: 'EDSON MINTSU HUNG', department_id: 443 },
     { name: 'PEDRO GARCIA FREITAS', department_id: 508 },
     { name: 'FLAVIA FERREIRA RAMOS ZAPATA', department_id: 518 },

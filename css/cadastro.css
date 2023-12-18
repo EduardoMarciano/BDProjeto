@@ -34,7 +34,7 @@
 }
 
 #signup-box {
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     border-radius: 10px;
     min-width: 450px;
     min-height: 70%;
@@ -68,25 +68,22 @@
 }
 
 #login-page-link {
-    color: var(--branco);
+    color: let(--branco);
     margin-bottom: 2%;
     text-decoration: none;
 }
 
 #login-page-link:hover {
-    color: var(--roxo-escuro);
+    color: let(--roxo-escuro);
     transition: 300ms;
 }
 
 #gender {
     font-size: inherit;
     font-family: inherit;
-    background-color: var(--branco);
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
+    background-color: let(--branco);
 
-    color: var(--preto);
+    color: let(--preto);
     font-weight: 700;
     height: 59px;
     border: none;
@@ -108,7 +105,7 @@
     font-weight: 700;
     font-size: inherit;
     font-family: inherit;
-    color: var(--preto);
+    color: let(--preto);
     min-height: 59px;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -116,11 +113,11 @@
 }
 
 #signup-confirm-button:hover {
-    background-color: var(--roxo-escuro);
+    background-color: let(--roxo-escuro);
     transition: 300ms;
 }
 
 #popup {
     color: red;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
 }

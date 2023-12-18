@@ -1,5 +1,5 @@
 async function carregaProfessor() {
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const postContainer = document.getElementById("posts-container");
   postContainer.innerHTML = "";
 
@@ -19,9 +19,9 @@ async function carregaProfessor() {
     if (response.status === 200) {
       const professors = await response.json();
 
-      for (let i = 0; i < professors.length; i++) {
-        const professor = professors[i];
-        var url_img_user = '/svg/user.svg';
+      for (const element of professors) {
+        const professor = element;
+        let url_img_user = '/svg/user.svg';
 
         const professorHTML = `
           <div class="post-professor">
@@ -55,7 +55,7 @@ async function carregaProfessor() {
 }
 
 async function carregaComment(professorId) {
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const postContainer = document.getElementById("posts-container");
   const data = {
     professorId: professorId
@@ -73,10 +73,10 @@ async function carregaComment(professorId) {
     if (response.status === 200) {
       const comments = await response.json();
 
-      for (let i = 0; i < comments.length; i++) {
-        const comment = comments[i];
+      for (const element of comments) {
+        const comment = element;
         console.log(comment);
-        var url_img_user = comment.user_image;
+        let url_img_user = comment.user_image;
 
         const commentHTML = `
           <div class="post">
@@ -123,7 +123,7 @@ async function carregaComment(professorId) {
 
 function checkUserIdVisibility(userId, commentId, ID) {
   const trashCanElement = document.getElementById(ID+'T');
-  var isAdm = sessionStorage.getItem('is_adm');
+  let isAdm = sessionStorage.getItem('is_adm');
 
   console.log(isAdm);
   
@@ -156,7 +156,7 @@ function publishModal() {
 }
 
 function releaseComment(professorId) {
-  var content = document.getElementById("new-content-post").value;
+  let content = document.getElementById("new-content-post").value;
   const userId = sessionStorage.getItem('userId');
   const data = {
     userId: userId,
@@ -206,7 +206,7 @@ function like(commentId) {
 
 function deleteComment(commentId) {
   commentId = commentId.slice(0, -1);;
-  var userId = parseInt(sessionStorage.getItem('userId'));
+  let userId = parseInt(sessionStorage.getItem('userId'));
   const data = {
     userId: userId,
     commentId: commentId,
@@ -255,4 +255,5 @@ function reportComment(commentId, user_id) {
     })
 }
 //Executa a função quando a página é carregada
-document.addEventListener("DOMContentLoaded", carregaProfessor);
+let loadProfessor = new Promise(carregaProfessor);
+document.addEventListener("DOMContentLoaded", loadProfessor);

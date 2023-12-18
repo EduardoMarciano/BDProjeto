@@ -1,6 +1,6 @@
 #header-bar {
     display: flex;
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     align-items: center;
     justify-content: space-between;
     padding-left: 2%;
@@ -20,7 +20,7 @@
     padding-left: 1.65%;
     padding-right: 1.65%;
     padding-top: 4px;
-    background: var(--branco);
+    background: let(--branco);
 }
 
 .footer-bar {
@@ -29,7 +29,7 @@
     padding-left: 2%;
     padding-right: 2%;
     height: clamp(47px, 8.4vh, 70px);
-    background-color: var(--roxo-claro);
+    background-color: let(--roxo-claro);
     box-sizing: border-box;
     text-align: center;
     align-items: center;
@@ -37,10 +37,9 @@
     border: none;
     border-radius: 16px;
     font-weight: bold;
-    padding: 12px 25px;
     text-decoration: none;
     color: inherit;
-    color: var(--branco);
+    color: let(--branco);
 }
 
 #session-buttons * {
@@ -54,12 +53,12 @@
 }
 
 #signin-button {
-    background: var(--roxo-escuro);
-    color: var(--branco);
+    background: let(--roxo-escuro);
+    color: let(--branco);
     align-self: center;
 }
 
 #signup-button {
-    background: var(--roxo-escuro);
-    color: var(--branco);
+    background: let(--roxo-escuro);
+    color: let(--branco);
 }

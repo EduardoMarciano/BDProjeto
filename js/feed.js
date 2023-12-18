@@ -1,5 +1,5 @@
 function carregaPosts() {
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
     const postContainer = document.getElementById("posts-container");
   
     postContainer.innerHTML = "";
@@ -30,7 +30,7 @@ function carregaPosts() {
 
           console.log(post);
           console.log(i);
-          var url_img_user = post.user_image;
+          let url_img_user = post.user_image;
   
           const postHTML = `
             <div class="post">

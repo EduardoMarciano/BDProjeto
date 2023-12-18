@@ -1,5 +1,5 @@
 function goToToken(userId) {
-  var enviar = document.getElementById("enter");
+  let enviar = document.getElementById("enter");
   
   sessionStorage.setItem('userId', userId);
 
@@ -10,8 +10,8 @@ function goToToken(userId) {
 }
 
 function EmailIsCorrect(email) {
-  var design = /\S+@\S+\.\S+/;
-  var permitir = design.test(email);
+  let design = /\S+@\S+\.\S+/;
+  let permitir = design.test(email);
 
   if (permitir) {
     return true;

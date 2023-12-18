@@ -7,10 +7,10 @@ const lines = [
     "/DATA/5.png"
   ];
   
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+  for (const element of lines) {
+    const line = element;
   
-    const buffer = Buffer.from(line, 'binary');
+    const buffer = buffer.from(line, 'binary');
   
     console.log(buffer);
   }

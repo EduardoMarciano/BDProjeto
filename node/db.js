@@ -34,22 +34,22 @@ connection.connect((err) => {
 const createUsersTable = `
   CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL,
-    gender VARCHAR(255) NOT NULL,
+    username letCHAR(255) NOT NULL,
+    password letCHAR(255) NOT NULL,
+    email letCHAR(255) NOT NULL,
+    role letCHAR(255) NOT NULL,
+    gender letCHAR(255) NOT NULL,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_adm BOOLEAN NOT NULL,
     token INT,
     image BLOB,
-    course VARCHAR(255) NOT NULL
+    course letCHAR(255) NOT NULL
 )`;
 
 const createProfessorsTable = `
   CREATE TABLE IF NOT EXISTS professors (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name letCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
     ON DELETE CASCADE
@@ -58,14 +58,14 @@ const createProfessorsTable = `
 const createDepartmentsTable = `
   CREATE TABLE IF NOT EXISTS departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name letCHAR(255) NOT NULL
 )`;
 
 const createDisciplinesTable = `
   CREATE TABLE IF NOT EXISTS disciplines (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    code VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    code letCHAR(255) NOT NULL,
+    name letCHAR(255) NOT NULL,
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(id)
     ON DELETE CASCADE
@@ -76,8 +76,8 @@ const createTurmasTable = `
     id INT AUTO_INCREMENT PRIMARY KEY,
     professor_id INT NOT NULL,
     discipline_id INT NOT NULL,
-    local VARCHAR(255) NOT NULL,
-    horario VARCHAR(255) NOT NULL,
+    local letCHAR(255) NOT NULL,
+    horario letCHAR(255) NOT NULL,
     numero INT NOT NULL,
     FOREIGN KEY (professor_id) REFERENCES professors(id)
     ON DELETE CASCADE,
@@ -89,7 +89,7 @@ const createPostsTable = `
   CREATE TABLE IF NOT EXISTS posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    content VARCHAR(255) NOT NULL,
+    content letCHAR(255) NOT NULL,
     likes INT,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -103,7 +103,7 @@ const createCommentsTable = `
     professor_id INT,
     discipline_id INT,
     turma_id INT,
-    content VARCHAR(255) NOT NULL,
+    content letCHAR(255) NOT NULL,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     likes INT,
     FOREIGN KEY (user_id) REFERENCES users(id)

@@ -1,5 +1,5 @@
 function carregaReports() {
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
     const postContainer = document.getElementById("posts-container");
   
     postContainer.innerHTML = "";
@@ -23,8 +23,8 @@ function carregaReports() {
         }
       })
       .then(comments => {
-        for (let i = 0; i < comments.length; i++) {
-          const comment = comments[i];
+        for (const element of comments) {
+          const comment = element;
           const url_img_user = comment.user_image;
   
           const postHTML = `
@@ -59,7 +59,7 @@ function carregaReports() {
 function checkUserIdVisibility(ID) {
     const sim = document.getElementById(ID+'T');
     const nao = document.getElementById(ID+'R');
-    var isAdm = sessionStorage.getItem('is_adm');
+    let isAdm = sessionStorage.getItem('is_adm');
   
     console.log(isAdm);
     
@@ -74,7 +74,7 @@ function checkUserIdVisibility(ID) {
     
 function denyReport(commentId) {
     commentId = commentId.slice(0, -1);;
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
     const data = {
       userId: userId,
       commentId: commentId,
@@ -100,7 +100,7 @@ function denyReport(commentId) {
 
 function acceptReport(commentId) {
     commentId = commentId.slice(0, -1);;
-    var userId = parseInt(sessionStorage.getItem('userId'));
+    let userId = parseInt(sessionStorage.getItem('userId'));
     const data = {
       userId: userId,
       commentId: commentId,

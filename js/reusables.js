@@ -12,8 +12,8 @@ function createBars() {
             let footerBarContainer = document.getElementById('footerbar-container');
             footerBarContainer.innerHTML = footerBarHTML;
    })
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
+    let head  = document.getElementsByTagName('head')[0];
+    let link  = document.createElement('link');
 
     link.rel  = 'stylesheet';
     link.href = '/css/reusables.css';
