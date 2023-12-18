@@ -1,4 +1,8 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const user = process.env.MAIL_USER;
+const password = process.env.MAIL_PASSWORD;
 
 function gerarToken(){
   let numeroAleatorio = 0;
@@ -18,8 +22,8 @@ async function enviarEmail(token, reciverMail) {
     port: 587,
     secure: false,
     auth: {
-      user: 'PROCESSOTRAINEECJR@outlook.com',
-      pass: '!!jKzWZv@M4QMeW@'
+      user: user,
+      pass: password
     },
     tls: {
       ciphers: 'SSLv3'
