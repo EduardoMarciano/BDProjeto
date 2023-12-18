@@ -3,19 +3,19 @@
 
 ## Configurações de ambiente, sistema operacional Linux (Debian):
 
-### Necessário instalação do node.js para rodar o back-end:
+### Necessária instalação do node.js para rodar o back-end:
 	sudo apt update
 	sudo apt install nodejs
 	sudo npm install -g npm
 ### Instalar dependências do sistema:
-		cd ../BDProjeto/node
-		npm install
+	cd ../BDProjeto/node
+	npm install
 #### O npm irá cuidar automaticamente de instalar cada dependência do sistema.
 
-#### Caso a primeira alternativa não funcione, é possível instalar individualmente todas as bibliotecas utilizadas no sistema com sua devida versão.
+#### Caso não funcione, é possível instalar individualmente todas as bibliotecas utilizadas no sistema com sua devida versão.
 ## Configurações da .env:
 ### É necessário colocar na .env o nome e a senha de acesso do usuário que irá interagir com o MariaDB, seguirei utilzando o user como root.
-	DB_user		= Seu usuário de acesso.
+	DB_user	= Seu usuário de acesso.
 	DB_PASSWORD = Sua senha de acesso.
 ### Caso queira utlizar os serviços de envio de email, será necessário ter um email configurado para utilizar o smtp do outlook e inserir as seguintes variáveis na .env:
 	MAIL_USER= Seu email corretamente configurado.
@@ -30,11 +30,11 @@
 	mysql -u root -p
 ### Criar a DataBase:
 	CREATE DATABASE BDprojeto;
-### Conceder privilégios ao usuário de acesso, exemplo para o usuário root, para acessar a base de dados:
+### Por fim, conceder privilégios ao usuário de acesso, exemplo para o usuário root:
 	GRANT ALL PRIVILEGES ON BDprojeto.* TO 'root'@'localhost';
 	FLUSH PRIVILEGES;
  ## Gerar tabelas e povoá-las:
- ### Por fim, para gerar as tabelas da database e fazer o povoamento automático do banco de dados, execute os seguintes comando:
+ ### Para gerar as tabelas da database e fazer o povoamento automático do banco de dados, execute os seguintes comando:
 	node db.js
  	node geraEntidades.js
   	node server.js
