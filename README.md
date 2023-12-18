@@ -13,20 +13,24 @@
 #### O npm irá cuidar automaticamente de instalar cada dependência do sistema.
 
 #### Caso a primeira alternativa não funcione, é possível instalar individualmente todas as bibliotecas utilizadas no sistema com sua devida versão.
+## Configurações da .env:
+### É necessário colocar na .env o nome e a senha de acesso do usuário que irá interagir com o MariaDB, seguirei utilzando o user como root.
+	DB_user		= Seu usuário de acesso.
+	DB_PASSWORD = Sua senha de acesso.
+### Caso queira utlizar os serviços de envio de email, será necessário ter um email configurado para utilizar o smtp do outlook e inserir as seguintes variáveis na .env:
+	MAIL_USER= Seu email corretamente configurado.
+	MAIL_PASSWORD= Sua senha de acesso ao email.
 ## Configuração do MariaDB.
 ### É necessário ter o MariaDB instalado em seu sistema. A instalação é possível seguindo estes passos:
 	sudo apt update
 	sudo apt install mariadb-server
-#### Depois, será necessário definir uma senha de acesso segura. Isto pode ser feito seguindo estes passos:
 ### iniciar o serviço do MariaDB:
 	sudo systemctl start mariadb
 ### Acessar o shell do MariaDB:
 	mysql -u root -p
-### Atualizar os privilégios:
-	FLUSH PRIVILEGES;
 ### Criar a DataBase:
 	CREATE DATABASE BDprojeto;
-### Conceder privilégios ao usuário root para acessar a base de dados:
+### Conceder privilégios ao usuário de acesso, exemplo para o usuário root, para acessar a base de dados:
 	GRANT ALL PRIVILEGES ON BDprojeto.* TO 'root'@'localhost';
 	FLUSH PRIVILEGES;
  ## Gerar tabelas e povoá-las:
@@ -34,7 +38,7 @@
 	node db.js
  	node geraEntidades.js
   	node server.js
-## Executar código:
+## Execução da Aplicação:
 #### Para rodar o sistema, agora, basta apenas usar o Live Server, https://open-vsx.org/extension/ritwickdey/LiveServer, na página de login. Lembre-se de deixar o server.js rodando enquanto a utilização do sistema.
 ## Modelo Conceitual:
 ![Diagrama de Entidade-Relacionamento](MER/ModeloConceitual.png)
@@ -44,4 +48,3 @@
 ### https://youtu.be/HDrOMiBEB-w
 ## Relatório Técnico (Link apenas para visualização):
 ### https://www.overleaf.com/read/gbfbbbswxqsr
-
