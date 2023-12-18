@@ -1,4 +1,4 @@
-const db = require('./backend/conetion.js');
+const db = require('./conetion.js');
 
 // POVOA O BANCO DE DADOS COM ALUNOS
 const users = [
