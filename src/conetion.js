@@ -19,9 +19,9 @@ connection.connect((err) => {
   console.log('Conexão estabelecida com sucesso');
 });
 
-const  createTables            = require('./Queries/StartTables');
-const  createStoredProcedures  = require('./Queries/StartProcedures');
-const  createViews             = require('./Queries/StartViews');
+const  createTables            = require('./StartQueries/tables');
+const  createStoredProcedures  = require('./StartQueries/procedures');
+const  createViews             = require('./StartQueries/views');
 
 const createAll = async () => {
   await createTables(connection);

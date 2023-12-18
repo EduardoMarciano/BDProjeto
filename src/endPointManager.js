@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connection = require('./geraEntidades.js');
+const connection = require('./conetion.js');
 const { gerarToken, enviarEmail } = require('./sendMail.js');
+
 const app = express();
 const port = 5600;    
 const { differenceInHours, differenceInDays, differenceInWeeks } = require('date-fns');

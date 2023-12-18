@@ -1,4 +1,4 @@
-const db = require('./db.js');
+const db = require('./conetion.js');
 
 // POVOA O BANCO DE DADOS COM ALUNOS
 const users = [
@@ -334,6 +334,3 @@ userProfessorPairs.forEach((pair, index) => {
       });
     });
 });
-
-module.exports = db;
-  
