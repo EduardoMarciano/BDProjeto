@@ -1,5 +1,5 @@
-import { createTransport } from '../../config/node_modules/nodemailer/lib/nodemailer';
-require('../../config/node_modules/dotenv/lib/main').config();
+import { createTransport } from '../../../config/node_modules/nodemailer/lib/nodemailer';
+require('../../../config/node_modules/dotenv/lib/main').config();
 
 const user = process.env.MAIL_USER;
 const password = process.env.MAIL_PASSWORD;

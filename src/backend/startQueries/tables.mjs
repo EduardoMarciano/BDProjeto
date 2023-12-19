@@ -8,11 +8,11 @@ import util from 'util';
     users:reports (1:N)
     departments:professors (1:N)
     departments:disciplines (1:N)
-    professors:turmas (1:N)
-    disciplines:turmas (1:N)
+    professors:classes (1:N)
+    disciplines:classes (1:N)
     professors:comments (1:N)
     disciplines:comments (1:N)
-    turmas:comments (1:N)
+    classes:comments (1:N)
 
 */
 
@@ -56,8 +56,8 @@ const createDisciplinesTable = `
     ON DELETE CASCADE
 )`;
 
-const createTurmasTable = `
-  CREATE TABLE IF NOT EXISTS turmas (
+const createclassesTable = `
+  CREATE TABLE IF NOT EXISTS classes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     professor_id INT NOT NULL,
     discipline_id INT NOT NULL,
@@ -95,7 +95,7 @@ const createCommentsTable = `
     ON DELETE CASCADE,
     FOREIGN KEY (professor_id) REFERENCES professors(id),
     FOREIGN KEY (discipline_id) REFERENCES disciplines(id),
-    FOREIGN KEY (turma_id) REFERENCES turmas(id)
+    FOREIGN KEY (turma_id) REFERENCES classes(id)
 )`;
 
 const createReportsTable = `
@@ -136,7 +136,7 @@ const createTables = async (connection) => {
   await createTable('departments',    connection, createDepartmentsTable);
   await createTable('professors',     connection, createProfessorsTable);
   await createTable('disciplines',    connection, createDisciplinesTable);
-  await createTable('turmas',         connection, createTurmasTable);
+  await createTable('classes',         connection, createclassesTable);
   await createTable('user_professor', connection, createUserProfessorTable);
   await createTable('comments',       connection, createCommentsTable);
   await createTable('reports',        connection, createReportsTable);

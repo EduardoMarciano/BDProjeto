@@ -1,6 +1,6 @@
-import express from '../../config/node_modules/express/index.js';
-import { json } from '../../config/node_modules/body-parser/index.js';
-import { query as _query } from './conetion.mjs';
+import express from '../../../config/node_modules/express/index.js';
+import { json } from '../../../config/node_modules/body-parser/index.js';
+import { query as _query } from '../conetion.mjs';
 import { gerarToken, enviarEmail } from './sendMail.mjs';
 
 const app = express();
@@ -326,14 +326,14 @@ app.post("/html/feed-professor", (req, res) => {
                 departments.name AS department_name,
                 disciplines.code AS discipline_code,
                 disciplines.name AS discipline_name,
-                turmas.id AS turma_id
+                classes.id AS turma_id
               FROM
                 professors
                 JOIN departments ON professors.department_id = departments.id
                 JOIN disciplines ON disciplines.department_id = departments.id
-                JOIN turmas ON turmas.discipline_id = disciplines.id
+                JOIN classes ON classes.discipline_id = disciplines.id
               WHERE
-                professors.id = turmas.professor_id;
+                professors.id = classes.professor_id;
 `;
 
   _query(query, function(err, result) {

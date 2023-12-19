@@ -29,10 +29,10 @@ const createProcedureListAllDisciplines = `
   END
 `;
 
-const createProcedureListAllTurmas = `
-  CREATE PROCEDURE IF NOT EXISTS ListAllTurmas()
+const createProcedureListAllclasses = `
+  CREATE PROCEDURE IF NOT EXISTS ListAllclasses()
   BEGIN
-    SELECT * FROM turmas;
+    SELECT * FROM classes;
   END
 `;
 
@@ -63,7 +63,7 @@ const createProcedures = async (connection) => {
   await createProcedure('ListUserPosts',      connection, createProcedureListUserPosts);
   await createProcedure('ListAllProfessors',  connection, createProcedureListAllProfessors);
   await createProcedure('ListAllDisciplines', connection, createProcedureListAllDisciplines);
-  await createProcedure('ListAllTurmas',      connection, createProcedureListAllTurmas);
+  await createProcedure('ListAllclasses',      connection, createProcedureListAllclasses);
 };
 
 export default createProcedures;
