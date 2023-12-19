@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+import { createTransport } from '../../config/node_modules/nodemailer/lib/nodemailer';
+require('../../config/node_modules/dotenv/lib/main').config();
 
 const user = process.env.MAIL_USER;
 const password = process.env.MAIL_PASSWORD;
@@ -17,7 +17,7 @@ function gerarToken(){
 
 async function enviarEmail(token, reciverMail) {
   
-  const transporter = nodemailer.createTransport({
+  const transporter = createTransport({
     host: 'smtp.office365.com',
     port: 587,
     secure: false,
@@ -42,7 +42,7 @@ async function enviarEmail(token, reciverMail) {
   await transporter.sendMail(mailOptions);
 }
 
-module.exports = {
+export default {
   gerarToken,
   enviarEmail
 };

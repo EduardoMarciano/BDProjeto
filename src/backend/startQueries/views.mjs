@@ -1,4 +1,4 @@
-const util = require('util');
+import util from 'util';
 
 // DEFINIÇÃO DA VIEW
 const createViewUserReportsAndComments = `
@@ -13,8 +13,10 @@ const createView = async (ViewName, connection, createQuery) => {
   try {
     const promisifiedQuery = util.promisify(connection.query).bind(connection);
     await promisifiedQuery(createQuery);
+    
     console.log(`View armazenada "${ViewName}" criada com sucessa`);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error(`Erro ao criar view armazenada "${ViewName}": ${error.stack}`);
   }
 };
@@ -23,4 +25,4 @@ const createViews = async (connection) => {
   await createView('UserReportsAndComments', connection, createViewUserReportsAndComments);
 };
 
-module.exports = createViews;
+export default createViews;

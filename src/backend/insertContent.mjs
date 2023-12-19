@@ -1,93 +1,11 @@
-const db = require('./conetion.js');
+import conetion from './conetion.mjs';
+import insertUsers from './insertQueries/users.mjs'
 
-// POVOA O BANCO DE DADOS COM ALUNOS
-const users = [
-  {
-    username: 'Eduardo Marciano',
-    password: 'Cenoura@12',
-    email: 'e.marciano.meneses@gmail.com',
-    role: 'administrador',
-    gender: 'male',
-    is_adm: true,
-    course: 'Ciência da Computação',
-    image: '/DATA/0.png'
-  },
-  {
-    username: 'Alice Brown',
-    password: 'Banana@34',
-    email: 'alice.brown@gmail.com',
-    role: 'aluno',
-    gender: 'female',
-    is_adm: false,
-    course: 'Engenharia da Computação',
-    image: '/DATA/1.png'
-  },
-  {
-    username: 'Bob Smith',
-    password: 'Abacaxi@56',
-    email: 'bob.smith@gmail.com',
-    role: 'aluno',
-    gender: 'male',
-    is_adm: false,
-    course: 'Licenciatura em Computação',
-    image: '/DATA/2.png'
-  },
-  {
-    username: 'Carol Johnson',
-    password: 'Pera@78',
-    email: 'carol.johnson@gmail.com',
-    role: 'aluno',
-    gender: 'female',
-    is_adm: false,
-    course: 'Ciência da Computação',
-    image: '/DATA/3.png'
-  },
-  {
-    username: 'Dave Williams',
-    password: 'Morango@90',
-    email: 'dave.williams@gmail.com',
-    role: 'aluno',
-    gender: 'male',
-    is_adm: false,
-    course: 'Engenharia da Computação',
-    image: '/DATA/4.png'
-  },
-  {
-    username: 'Emily Jones',
-    password: 'Melancia@12',
-    email: 'emily.jones@gmail.com',
-    role: 'aluno',
-    gender: 'female',
-    is_adm: false,
-    course: 'Licenciatura em Computação',
-    image: '/DATA/5.png'
-  }
-];
-
-const checkExistingUserQuery = 'SELECT id FROM users WHERE email = ?';
-const insertUserQuery = 'INSERT INTO users SET ?';
-
-users.forEach((user) => {
-  db.query(checkExistingUserQuery, user.email, (error, results) => {
-    if (error) {
-      console.error('Erro ao verificar usuário existente: ' + error.stack);
-      return;
-    }
-
-    if (results.length > 0) {
-      console.log(`Usuário com o e-mail ${user.email} já existe. Ignorando inserção.`);
-      return;
-    }
-
-    db.query(insertUserQuery, user, (error, results) => {
-      if (error) {
-        console.error('Erro ao inserir usuário: ' + error.stack);
-        return;
-      }
-      console.log(`Usuário ${user.username} inserido com sucesso. ID: ${results.insertId}`);
-    });
-  });
-});
+// Função de Inserção:
+async function insertAll(){
+  await insertUsers(conetion);
+}
+insertAll();
 
 const departments = [
   { id: 429, name: 'FACULDADE DE TECNOLOGIA' },
@@ -102,7 +20,7 @@ const checkExistingDepartmentQuery = 'SELECT id FROM departments WHERE id = ?';
 const insertDepartmentQuery = 'INSERT INTO departments (id, name) VALUES (?, ?)';
 
 departments.forEach((department) => {
-  db.query(checkExistingDepartmentQuery, department.id, (error, results) => {
+  conetion.query(checkExistingDepartmentQuery, department.id, (error, results) => {
     if (error) {
       console.error(`Erro ao verificar a existência do departamento ${department.name}: ${error.stack}`);
       return;
@@ -113,7 +31,7 @@ departments.forEach((department) => {
       return;
     }
 
-    db.query(insertDepartmentQuery, [department.id, department.name], (error, results) => {
+    conetion.query(insertDepartmentQuery, [department.id, department.name], (error, results) => {
       if (error) {
         console.error(`Erro ao inserir departamento ${department.name}: ${error.stack}`);
         return;
@@ -136,7 +54,7 @@ const disciplines = [
   const insertDisciplineQuery = 'INSERT INTO disciplines (code, name, department_id) VALUES (?, ?, ?)';
   
   disciplines.forEach((discipline) => {
-    db.query(checkExistingDisciplineQuery, discipline.code, (error, results) => {
+    conetion.query(checkExistingDisciplineQuery, discipline.code, (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência da disciplina ${discipline.name}: ${error.stack}`);
         return;
@@ -147,7 +65,7 @@ const disciplines = [
         return;
       }
   
-      db.query(insertDisciplineQuery, [discipline.code, discipline.name, discipline.department_id], (error, results) => {
+      conetion.query(insertDisciplineQuery, [discipline.code, discipline.name, discipline.department_id], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir disciplina ${discipline.name}: ${error.stack}`);
           return;
@@ -170,7 +88,7 @@ const professors = [
   const insertProfessorQuery = 'INSERT INTO professors (name, department_id) VALUES (?, ?)';
   
   professors.forEach((professor, index) => {
-    db.query(checkExistingProfessorQuery, professor.department_id, (error, results) => {
+    conetion.query(checkExistingProfessorQuery, professor.department_id, (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência do professor ${professor.name}: ${error.stack}`);
         return;
@@ -181,7 +99,7 @@ const professors = [
         return;
       }
   
-      db.query(insertProfessorQuery, [professor.name, professor.department_id], (error, results) => {
+      conetion.query(insertProfessorQuery, [professor.name, professor.department_id], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir professor da disciplina ${index + 1}: ${error.stack}`);
           return;
@@ -204,7 +122,7 @@ const professors = [
   const insertTurmaQuery = 'INSERT INTO turmas (professor_id, discipline_id, horario, local, numero) VALUES (?, ?, ?, ?, ?)';
   
   turmas.forEach((turma, index) => {
-    db.query(checkExistingTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
+    conetion.query(checkExistingTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência da turma ${index + 1}: ${error.stack}`);
         return;
@@ -215,7 +133,7 @@ const professors = [
         return;
       }
   
-      db.query(insertTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
+      conetion.query(insertTurmaQuery, [turma.professor_id, turma.discipline_id, turma.horario, turma.local, turma.numero], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir turma ${index + 1}: ${error.stack}`);
           return;
@@ -273,7 +191,7 @@ const usersPosts = [
   const checkExistingPostQuery = 'SELECT id FROM posts WHERE user_id = ? AND content = ?';
   
   usersPosts.forEach((post, index) => {
-    db.query(checkExistingPostQuery, [post.user_id, post.content], (error, results) => {
+    conetion.query(checkExistingPostQuery, [post.user_id, post.content], (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência do post ${index + 1}: ${error.stack}`);
         return;
@@ -284,7 +202,7 @@ const usersPosts = [
         return;
       }
   
-      db.query(insertPostQuery, [post.user_id, post.content], (error, results) => {
+      conetion.query(insertPostQuery, [post.user_id, post.content], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir post ${index + 1}: ${error.stack}`);
           return;
@@ -313,7 +231,7 @@ const checkExistingUserProfessorQuery = 'SELECT COUNT(*) AS count FROM user_prof
 const insertUserProfessorQuery = 'INSERT INTO user_professor (user_id, professor_id) VALUES (?, ?)';
   
 userProfessorPairs.forEach((pair, index) => {
-    db.query(checkExistingUserProfessorQuery, [pair.user_id, pair.professor_id], (error, results) => {
+    conetion.query(checkExistingUserProfessorQuery, [pair.user_id, pair.professor_id], (error, results) => {
       if (error) {
         console.error(`Erro ao verificar a existência da associação usuário-professor ${index + 1}: ${error.stack}`);
         return;
@@ -325,7 +243,7 @@ userProfessorPairs.forEach((pair, index) => {
         return;
       }
   
-      db.query(insertUserProfessorQuery, [pair.user_id, pair.professor_id], (error, results) => {
+      conetion.query(insertUserProfessorQuery, [pair.user_id, pair.professor_id], (error, results) => {
         if (error) {
           console.error(`Erro ao inserir associação usuário-professor ${index + 1}: ${error.stack}`);
           return;

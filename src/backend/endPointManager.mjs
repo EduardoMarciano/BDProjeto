@@ -1,13 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const connection = require('./conetion.js');
-const { gerarToken, enviarEmail } = require('./sendMail.js');
+import express from '../../config/node_modules/express/index.js';
+import { json } from '../../config/node_modules/body-parser/index.js';
+import { query as _query } from './conetion.mjs';
+import { gerarToken, enviarEmail } from './sendMail.mjs';
 
 const app = express();
 const port = 5600;    
-const { differenceInHours, differenceInDays, differenceInWeeks } = require('date-fns');
+import { differenceInHours, differenceInDays, differenceInWeeks } from 'date-fns';
 
-app.use(bodyParser.json());
+app.use(json());
 
 // Habilitar o CORS
 app.use(function(req, res, next) {
@@ -21,10 +21,10 @@ app.post("/html/cadastro", (req, res) => {
   const {username, password, email, role, gender, is_adm, course} = req.body;
   let query = 'SELECT * FROM users WHERE email = ?';
 
-  connection.query(query, [email], function(err, result) {
+  _query(query, [email], function(err, result) {
     if (result.length <= 0) {
       query = 'INSERT INTO users (username, password, email, role, gender, is_adm, course) VALUES (?, ?, ?, ?, ?, ?, ?)';
-      connection.query(query, [username, password, email, role, gender, is_adm, course], function(err, result) {
+      _query(query, [username, password, email, role, gender, is_adm, course], function(err, result) {
         console.log("Usuário Cadastrado.");
         res.status(200).send();
       });
@@ -38,7 +38,7 @@ app.post("/html/login", (req, res) => {
   const { email, password } = req.body;
   let query = 'SELECT users.username, users.password, users.id, users.is_adm FROM users WHERE email = ?';
 
-  connection.query(query, [email], function(err, result) {
+  _query(query, [email], function(err, result) {
     if (err) {
       console.error(err);
       return res.status(500).send('Erro ao buscar usuário');
@@ -59,7 +59,7 @@ app.post("/html/conferir-email", (req, res) => {
   const {email} = req.body;
   let query = 'SELECT users.id FROM users WHERE email = ?';
 
-  connection.query(query, [email], function(err, result) {
+  _query(query, [email], function(err, result) {
 
     if ((result.length === 1)) {
       let userId = result[0].id;
@@ -67,7 +67,7 @@ app.post("/html/conferir-email", (req, res) => {
 
       query = 'UPDATE users SET token = ? WHERE id = ?';
 
-      connection.query(query, [token, userId], function(err, result) {
+      _query(query, [token, userId], function(err, result) {
 
         enviarEmail(token, email);
         console.log("Entrada do Usuário permitida.");
@@ -85,7 +85,7 @@ app.post("/html/conferir-token", (req, res) => {
   const {token} = req.body;
   let query = 'SELECT * from users WHERE token = ?';
 
-  connection.query(query, [token], function(err, result) {
+  _query(query, [token], function(err, result) {
     
     if(result.length === 1){     
       console.log("Token correto.");
@@ -101,12 +101,12 @@ app.post("/html/recuperar-senha", (req, res) => {
   const {password, userId} = req.body;
   
   let query = 'SELECT * from users WHERE id = ?';
-  connection.query(query, [userId], function(err, result) {
+  _query(query, [userId], function(err, result) {
     
     if(result.length === 1){
       console.log('exite');
       query = 'UPDATE users SET password = ? WHERE id = ?';
-      connection.query(query, [password, userId], function(err, result) {
+      _query(query, [password, userId], function(err, result) {
         console.log(password);
         console.log("Senha cadastrada.");      
         res.status(200).send(userId.toString());
@@ -124,7 +124,7 @@ app.post("/html/perfil", (req, res) => {
   const {userId} = req.body;
   
   let query = 'SELECT * from users WHERE id = ?';
-  connection.query(query, [userId], function(err, result) {
+  _query(query, [userId], function(err, result) {
     
     if(result.length === 1){
 
@@ -162,7 +162,7 @@ app.post("/html/perfil-post", (req, res) => {
                INNER JOIN users ON posts.user_id = users.id WHERE user_id = ?
                ORDER BY posts.created_time DESC`;
 
-  connection.query(query, [userId], function(err, result) {
+  _query(query, [userId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao carregar os posts');
@@ -214,7 +214,7 @@ app.post("/html/feed-post", (req, res) => {
 
   let query = `CALL GetAllPosts()`;
 
-  connection.query(query, function(err, result) {
+  _query(query, function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao carregar os posts');
@@ -260,7 +260,7 @@ app.post('/html/perfil-new-post', (req, res) => {
 
   let query = `INSERT INTO posts (user_id, content, created_time) VALUES (?, ?, NOW())`;
 
-  connection.query(query, [userId, content], function(err, result) {
+  _query(query, [userId, content], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao criar o novo post');
@@ -276,7 +276,7 @@ app.post('/html/perfil-delete-post', (req, res) => {
   const {postId} = req.body;
   let query = `DELETE FROM posts WHERE id = ? `;
 
-  connection.query(query, [postId], function(err, result) {
+  _query(query, [postId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao deletar o novo post');
@@ -291,7 +291,7 @@ app.post('/html/perfil-delete-user', (req, res) => {
   const {userId} = req.body;
   let query = `DELETE FROM users WHERE id = ? `;
 
-  connection.query(query, [userId], function(err, result) {
+  _query(query, [userId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao deletar o user');
@@ -306,10 +306,10 @@ app.post("/html/editar-dados", (req, res) => {
   const { username, email, role, gender, is_adm, course, userId } = req.body;
   let query = 'SELECT * FROM users WHERE email = ?';
 
-  connection.query(query, [email], function(err, result) {
+  _query(query, [email], function(err, result) {
     if (result.length <= 0) {
       query = 'UPDATE users SET username = ?, email = ?, role = ?, gender = ?, is_adm = ?, course = ? WHERE id = ?';
-      connection.query(query, [username, email, role, gender, is_adm, course, userId], function(err, result) {
+      _query(query, [username, email, role, gender, is_adm, course, userId], function(err, result) {
         console.log("Dados do usuário atualizados.");
         res.status(200).send();
       });
@@ -336,7 +336,7 @@ app.post("/html/feed-professor", (req, res) => {
                 professors.id = turmas.professor_id;
 `;
 
-  connection.query(query, function(err, result) {
+  _query(query, function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao carregar os posts');
@@ -355,7 +355,7 @@ app.post('/html/feed-professor-new-comment', (req, res) => {
 
   const query = `INSERT INTO comments (user_id, professor_id, content, likes) VALUES (?, ?, ?, 0)`;
 
-  connection.query(query, [userId, professorId, content], function(err, result) {
+  _query(query, [userId, professorId, content], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao criar o novo comentário');
@@ -389,7 +389,7 @@ app.post("/html/feed-professor-comments", (req, res) => {
     ORDER BY
       comments.created_time DESC`;
 
-  connection.query(query, [professorId], function(err, result) {
+  _query(query, [professorId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao carregar os comentários');
@@ -437,7 +437,7 @@ app.post('/html/feed-professor-like', (req, res) => {
   // Atualizar o número de curtidas no banco de dados
   const updateQuery = `UPDATE comments SET likes = likes + 1 WHERE id = ?`;
 
-  connection.query(updateQuery, [commentId], function(err, result) {
+  _query(updateQuery, [commentId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao atualizar o número de curtidas');
@@ -446,7 +446,7 @@ app.post('/html/feed-professor-like', (req, res) => {
     // Obter o novo número de curtidas do comentário
     const selectQuery = `SELECT likes FROM comments WHERE id = ?`;
 
-    connection.query(selectQuery, [commentId], function(err, result) {
+    _query(selectQuery, [commentId], function(err, result) {
       if (err) {
         console.error(err);
         res.status(500).send('Erro ao obter o número de curtidas atualizado');
@@ -466,7 +466,7 @@ app.post('/html/perfil-update-post', (req, res) => {
   // Atualizar o conteúdo do post no banco de dados
   const updateQuery = `UPDATE posts SET content = ? WHERE id = ?`;
 
-  connection.query(updateQuery, [content, postId], function(err, result) {
+  _query(updateQuery, [content, postId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao atualizar o post');
@@ -482,7 +482,7 @@ app.post('/html/feed-professor-delete-comment', (req, res) => {
   const {commentId} = req.body;
   let query = `DELETE FROM comments WHERE id = ? `;
 
-  connection.query(query, [commentId ], function(err, result) {
+  _query(query, [commentId ], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao deletar o novo post');
@@ -497,7 +497,7 @@ app.post('/html/feed-professor-report-comment', (req, res) => {
     
     // Verificar se já existe um report para o commentId
     const checkExistingReportQuery = `SELECT * FROM reports WHERE comment_id = ? LIMIT 1`;
-    connection.query(checkExistingReportQuery, [commentId], function(err, result) {
+    _query(checkExistingReportQuery, [commentId], function(err, result) {
       if (err) {
         console.error(err);
         res.status(500).send('Erro ao verificar o report existente');
@@ -512,7 +512,7 @@ app.post('/html/feed-professor-report-comment', (req, res) => {
       
       // Caso contrário, criar o novo report
       const createReportQuery = `INSERT INTO reports (user_id, comment_id) VALUES (?, ?)`;
-      connection.query(createReportQuery, [userId, commentId], function(err, result) {
+      _query(createReportQuery, [userId, commentId], function(err, result) {
         if (err) {
           console.error(err);
           res.status(500).send('Erro ao criar o novo report');
@@ -543,7 +543,7 @@ app.post("/html/feed-report-comments", (req, res) => {
     ORDER BY
       comments.created_time DESC`;
   
-    connection.query(query, [], function(err, result) {
+    _query(query, [], function(err, result) {
       if (err) {
         console.error(err);
         res.status(500).send('Erro ao carregar os comentários');
@@ -592,7 +592,7 @@ app.post('/html/feed-report-deny-report', (req, res) => {
 
   // Excluir a denúncia da tabela "reports"
   const deleteReportQuery = `DELETE FROM reports WHERE comment_id = ?`;
-  connection.query(deleteReportQuery, [commentId], function(err, result) {
+  _query(deleteReportQuery, [commentId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao recusar a denúncia');
@@ -608,7 +608,7 @@ app.post('/html/feed-report-accept-report', (req, res) => {
 
   // Excluir o comentário da tabela "comments"
   const deleteCommentQuery = `DELETE FROM comments WHERE id = ?`;
-  connection.query(deleteCommentQuery, [commentId], function(err, result) {
+  _query(deleteCommentQuery, [commentId], function(err, result) {
     if (err) {
       console.error(err);
       res.status(500).send('Erro ao aceitar a denúncia e remover o comentário');
@@ -631,7 +631,7 @@ app.post('/html/perfil-change-image', (req, res) => {
     const buffer = Buffer.from(imagePath, 'binary');
 
   const query = 'UPDATE users SET image = ? WHERE id = ?';
-  connection.query(query, [buffer, userId], (err, result) => {
+  _query(query, [buffer, userId], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Erro ao sallet o caminho da imagem');

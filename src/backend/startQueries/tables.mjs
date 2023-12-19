@@ -1,4 +1,4 @@
-const util = require('util');
+import util from 'util';
 
 /*DEFINIÇÃO DAS TABELAS
 
@@ -142,4 +142,4 @@ const createTables = async (connection) => {
   await createTable('reports',        connection, createReportsTable);
 };
 
-module.exports = createTables;
+export default createTables;

@@ -1,4 +1,4 @@
-const util = require('util');
+import util from 'util';
 
 // DEFINIÇÃO DAS PROCEDURES
 const createProcedureListAllPosts = `
@@ -66,4 +66,4 @@ const createProcedures = async (connection) => {
   await createProcedure('ListAllTurmas',      connection, createProcedureListAllTurmas);
 };
 
-module.exports = createProcedures;
+export default createProcedures;

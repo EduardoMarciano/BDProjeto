@@ -1,10 +1,11 @@
-const mysql = require('mysql');
-require('dotenv').config();
+import { createConnection } from '../../config/node_modules/mysql/index.js';
+import { config } from '../../config/node_modules/dotenv/lib/main.js';
 
+config({path: "../../.env"});
 const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 
-const connection = mysql.createConnection({
+const connection = createConnection({
   host:'localhost',
   user: user,
   password: password,
@@ -19,15 +20,16 @@ connection.connect((err) => {
   console.log('Conexão estabelecida com sucesso');
 });
 
-const  createTables            = require('./startQueries/tables');
-const  createStoredProcedures  = require('./startQueries/procedures');
-const  createViews             = require('./startQueries/views');
+import createTables from './startQueries/tables.mjs';
+import createStoredProcedures from './startQueries/procedures.mjs';
+import createViews from './startQueries/views.mjs';
 
-const createAll = async () => {
+async function createAll() {
   await createTables(connection);
   await createStoredProcedures(connection);
   await createViews(connection);
 };
 
 createAll();
-module.exports = connection;
+
+export default connection;
