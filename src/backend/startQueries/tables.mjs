@@ -62,12 +62,11 @@ const createclassesTable = `
     professor_id INT NOT NULL,
     discipline_id INT NOT NULL,
     local VARCHAR(255) NOT NULL,
-    horario VARCHAR(255) NOT NULL,
-    numero INT NOT NULL,
+    time VARCHAR(255) NOT NULL,
+    number INT NOT NULL,
     FOREIGN KEY (professor_id) REFERENCES professors(id)
     ON DELETE CASCADE,
-    FOREIGN KEY (discipline_id) REFERENCES disciplines(id)
-    ON DELETE CASCADE
+    FOREIGN KEY (discipline_id) REFERENCES disciplines(id) ON DELETE CASCADE
 )`;
 
 const createPostsTable = `
@@ -77,8 +76,7 @@ const createPostsTable = `
     content VARCHAR(255) NOT NULL,
     likes INT,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-    ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )`;
 
 const createCommentsTable = `
@@ -87,15 +85,14 @@ const createCommentsTable = `
     user_id INT NOT NULL,
     professor_id INT,
     discipline_id INT,
-    turma_id INT,
+    class_id INT,
     content VARCHAR(255) NOT NULL,
     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     likes INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-    ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (professor_id) REFERENCES professors(id),
     FOREIGN KEY (discipline_id) REFERENCES disciplines(id),
-    FOREIGN KEY (turma_id) REFERENCES classes(id)
+    FOREIGN KEY (class_id) REFERENCES classes(id)
 )`;
 
 const createReportsTable = `

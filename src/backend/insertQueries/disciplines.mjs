@@ -42,7 +42,7 @@ async function insertDisciplines(connection) {
   try {
       for (const dicipline of disciplines) {
           try {
-              const existingDicipline = await insertDiscipline(connection, dicipline.id);
+              const existingDicipline = await checkExistingDiscipline(connection, dicipline.id);
 
               if (existingDicipline.length > 0) {
                   console.log(`Diciplina com o código ${dicipline.code} já existe. Ignorando inserção.`);
